@@ -1,1 +1,30 @@
-{}
+{
+  "name": "ergasia-mania-mern",
+  "version": "1.0.0",
+  "description": "#### Track Your Job Search",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1KRS/ergasia-mania-mern.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1KRS/ergasia-mania-mern/issues"
+  },
+  "homepage": "https://github.com/1KRS/ergasia-mania-mern#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.1"
+  }
+}
