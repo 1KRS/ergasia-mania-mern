@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import errorHandlerMiddleware from './middleware/error-handler.js';
 import notFoundMiddleware from './middleware/not-found.js';
 import connectDB from './db/connect.js';
+import 'express-async-errors' // Πρέπει να μπαίνει πριν τους δρομολογητές (Routers)
 import jobsRouter from './routes/jobsRoutes.js';
 import authRouter from './routes/authRoutes.js';
 

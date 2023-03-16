@@ -23,15 +23,26 @@ const UserSchema = new mongoose.Schema({
     unique: true,
     validate: {
       validator: validator.isEmail,
-      message: 'Please provide a valid email'
-    }
+      message: 'Please provide a valid email',
+    },
   },
   password: {
     type: String,
     required: [true, 'Please provide a password'],
     minLength: 6,
   },
-  location: { type: String, maxLength: 20, trim: true, default: 'My city' },
+  location: {
+    type: String,
+    minLength: 4,
+    maxLength: 20,
+    trim: true,
+    default: 'My city',
+  },
+  isMember: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export default mongoose.model('User', UserSchema);
+
