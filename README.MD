@@ -1396,8 +1396,8 @@ npm install mongoose
 
 - create <b>db</b> folder
 - create connect.js
-- setup connectDB(url)
-- in server.js create start() function
+- setup connectDB(url) in connect.js
+- in server.js create startServer() function
 - get connection string
 - setup as MONGO_URL in .env
 - provide credentials and DB Name
