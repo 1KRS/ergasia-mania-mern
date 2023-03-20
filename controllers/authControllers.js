@@ -12,6 +12,7 @@ const registerUser = async (req, res, next) => {
       email: user.email,
     },
     token,
+    location: user.location,
   });
 };
 const loginUser = async (req, res) => {

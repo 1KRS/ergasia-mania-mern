@@ -14,11 +14,12 @@ const port = process.env.PORT || 5000;
 
 // Authentication | Αυθεντικοποίηση Χρήστη
 
+
 // Middleware and Routes | Ενδιάμεσο λογισμικό και διαδρομές
 
 app.use(express.json()); // Κάνει διαθέσιμα τα στοιχεία JSON στις διαδρομές μας παρακάτω (λόγω POST request)
 
-app.get('/', (req, res) => {
+app.get('/api/v1', (req, res) => {
   res.send('Ούλε τε και μάλα χαίρε!');
 });
 
