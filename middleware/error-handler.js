@@ -12,7 +12,7 @@ const errorHandlerMiddleware = (error, req, res, next) => {
   }
   if (error.code === 11000) {
     errorObj.statusCode = StatusCodes.BAD_REQUEST
-    errorObj.message = `This ${Object.keys(error.keyValue)} is already in use. Please try again with a new one.`
+    errorObj.message = `Αυτό το ${Object.keys(error.keyValue)} χρησιμοποιείται. Δοκιμάστε κάποιο άλλο.`
   }
   res.status(errorObj.statusCode).json(errorObj.message);
   // res.status(errorObj.statusCode).json({ msg: error }); // Βλέπεις όλο το μήνυμα 
