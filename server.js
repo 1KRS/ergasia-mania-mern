@@ -6,6 +6,7 @@ import connectDB from './db/connect.js';
 import 'express-async-errors'; // Πρέπει να μπαίνει πριν τους δρομολογητές (Routers)
 import jobsRouter from './routes/jobsRoutes.js';
 import authRouter from './routes/authRoutes.js';
+import morgan from 'morgan';
 
 dotenv.config();
 
@@ -16,6 +17,10 @@ const port = process.env.PORT || 5000;
 
 
 // Middleware and Routes | Ενδιάμεσο λογισμικό και διαδρομές
+
+if (process.env.NODE_ENV !== 'production') {
+  app.use(morgan('dev'))
+}
 
 app.use(express.json()); // Κάνει διαθέσιμα τα στοιχεία JSON στις διαδρομές μας παρακάτω (λόγω POST request)
 

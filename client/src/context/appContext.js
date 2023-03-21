@@ -4,9 +4,9 @@ import React, { useReducer, useContext } from 'react';
 import {
   CLEAR_ALERT,
   DISPLAY_ALERT,
-  REGISTER_USER_BEGIN,
-  REGISTER_USER_SUCCESS,
-  REGISTER_USER_ERROR,
+  // REGISTER_USER_BEGIN,
+  // REGISTER_USER_SUCCESS,
+  // REGISTER_USER_ERROR,
 } from './actions';
 import reducer from './reducer';
 import axios from 'axios';
@@ -56,12 +56,12 @@ const AppProvider = ({ children }) => {
   };
 
   const registerUser = async (currentUser) => {
-    dispatch({ type: REGISTER_USER_BEGIN });
+    dispatch({ type: 'REGISTER_USER_BEGIN' });
     try {
       const response = await axios.post('/api/v1/auth/register', currentUser);
       const { user, token, location } = response.data;
       dispatch({
-        type: REGISTER_USER_SUCCESS,
+        type: 'REGISTER_USER_SUCCESS',
         payload: { user, token, location },
       });
       addUserToLocalStorage({
@@ -71,7 +71,7 @@ const AppProvider = ({ children }) => {
       });
     } catch (error) {
       dispatch({
-        type: REGISTER_USER_ERROR,
+        type: 'REGISTER_USER_ERROR',
         payload: { msg: error.response.data },
       });
     }
@@ -84,7 +84,6 @@ const AppProvider = ({ children }) => {
         ...state,
         displayAlert,
         clearAlert,
-        removeUserFromLocalStorage,
         registerUser,
       }}
     >

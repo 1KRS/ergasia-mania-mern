@@ -6,31 +6,31 @@ import jwt from 'jsonwebtoken'
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'Please provide your name'],
+    required: [true, 'Παρακαλώ, γράψε το όνομά σου.'],
     minLength: 2,
     maxLength: 20,
     trim: true,
   },
   lastName: {
     type: String,
-    required: [true, 'Please provide your last name'],
+    required: [true, 'Παρακαλώ, γράψε το επώνυμό σου.'],
     minLength: 2,
     maxLength: 30,
     trim: true,
-    default: 'Lastname',
+    default: 'Επώνυμο',
   },
   email: {
     type: String,
-    required: [true, 'Please provide your email'],
+    required: [true, 'Παρακαλώ, γράψε το ηΤαχυδρομείο σου.'],
     unique: true,
     validate: {
       validator: validator.isEmail,
-      message: 'Please provide a valid email',
+      message: 'Παρακαλώ, γράψε μία έγκυρη διεύθυνση.',
     },
   },
   password: {
     type: String,
-    required: [true, 'Please provide a password'],
+    required: [true, 'Παρακαλώ, γράψε έναν κωδικό.'],
     minLength: 6,
     select: false,
   },
@@ -39,7 +39,7 @@ const UserSchema = new mongoose.Schema({
     minLength: 4,
     maxLength: 20,
     trim: true,
-    default: 'My city',
+    default: 'Η πόλη μου',
   },
   isMember: {
     type: Boolean,
@@ -57,5 +57,10 @@ UserSchema.methods.createJWT = function () {
     expiresIn: process.env.JWT_LIFETIME,
   });
 };
+
+UserSchema.methods.comparePassword = async function (candidatePassword) {
+  const isMatch = await bcrypt.compare(candidatePassword, this.password)
+  return isMatch
+}
 
 export default mongoose.model('User', UserSchema);
