@@ -13,7 +13,7 @@ const Landing = () => {
         <div className="info">
           {/* info */}
           <h1>
-            Job <span>Tracking</span> App
+            Σημείο <span>Ιχνηλάτησης</span> Εργασίας
           </h1>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
@@ -22,7 +22,7 @@ const Landing = () => {
             dolores eaque! Error, tempore debitis!
           </p>
           <Link to="/register" className="btn btn-hero">
-            Login/Register
+            Σύνδεση / Εγγραφή
           </Link>
         </div>
         <img src={main} alt="Job hunt" className="img main-img" />
@@ -48,6 +48,7 @@ const Wrapper = styled.main`
   }
   h1 {
     font-weight: 700;
+    font-size: 2.6rem;
     span {
       color: var(--primary-500);
     }

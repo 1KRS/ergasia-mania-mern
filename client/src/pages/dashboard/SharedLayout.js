@@ -1,16 +1,26 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import { BigSidebar, Navbar, SmallSidebar } from '../../components';
 import styled from 'styled-components'
+import { useAppContext } from '../../context/appContext';
 
 const SharedLayout = () => {
+  const { user } = useAppContext();
   return (
-    <Wrapper>
-      <nav>
-        <Link to='all-jobs'>All Jobs</Link>
-        <Link to='add-job'>Add Job</Link>
-      </nav>
-      <Outlet />
-    </Wrapper>
-  );
+    <>
+      <Wrapper>
+        <main className='dashboard'>
+          <SmallSidebar />
+          <BigSidebar />
+          <div>
+            <Navbar />
+            <div className='dashboard-page'>
+              <Outlet />
+            </div>
+          </div>
+        </main>
+      </Wrapper>
+    </>
+    )
 };
 
 const Wrapper = styled.section`
