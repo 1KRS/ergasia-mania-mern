@@ -14,7 +14,7 @@ const initialState = {
 const Register = () => {
   const navigate = useNavigate();
   const [values, setValues] = useState(initialState);
-  const { user, isLoading, showAlert, displayAlert, registerUser } =
+  const { user, isLoading, showAlert, displayAlert, registerUser, loginUser } =
     useAppContext();
 
   const toggleMember = () => {
@@ -28,7 +28,6 @@ const Register = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     const { name, email, password, isMember } = values;
-    console.log('1 values', values)
 
     if (!email || !password || (!isMember && !name)) {
       displayAlert();
@@ -38,11 +37,12 @@ const Register = () => {
     const currentUser = { name, email, password };
 
     if (isMember) {
-      console.log('Already a member');
+      console.log('Ήδη μέλος.');
+      loginUser({email, password});
     } else {
-      registerUser(currentUser);
+      console.log('Στοιχεία (Values): ', values);
+      registerUser({currentUser});
     }
-    console.log('Values', values);
   };
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const Register = () => {
     <Wrapper className="full-page">
       <form className="form" onSubmit={onSubmit}>
         <Logo />
-        <h3>{values.isMember ? 'Login' : 'Register'}</h3>
+        <h3>{values.isMember ? 'Είσοδος' : 'Εγγραφή'}</h3>
         {showAlert && <Alert />}
         {!values.isMember && (
           <FormRow
@@ -65,6 +65,7 @@ const Register = () => {
             name="name"
             value={values.name}
             handleChange={handleChange}
+            labelText='Όνομα'
           />
         )}
         <FormRow
@@ -72,20 +73,22 @@ const Register = () => {
           name="email"
           value={values.email}
           handleChange={handleChange}
+          labelText='Ηλ. Ταχυδρομείο'
         />
         <FormRow
           type="password"
           name="password"
           value={values.password}
           handleChange={handleChange}
+          labelText='Κωδικός'
         />
         <button type="submit" className="btn btn-block" disabled={isLoading}>
-          Submit
+        {values.isMember ? 'Σύνδεση' : 'Εγγραφή'}
         </button>
         <p>
-          {values.isMember ? 'Not a member yet?' : 'Already a member?'}
+          {values.isMember ? 'Δεν είσαι μέλος; ' : 'Είσαι ήδη μέλος; '}
           <button type="button" onClick={toggleMember} className="member-btn">
-            {values.isMember ? 'Register' : 'Login'}
+            {values.isMember ? 'Εγγράψου.' : 'Συνδέσου.'}
           </button>
         </p>
       </form>

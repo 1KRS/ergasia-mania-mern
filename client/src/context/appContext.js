@@ -1,13 +1,6 @@
 // Εδώ περνάμε όλες τις καταστάσεις και τις λειτουργίες σε όλα τα επίπεδα της εφαρμογής.
 
 import React, { useReducer, useContext } from 'react';
-import {
-  CLEAR_ALERT,
-  DISPLAY_ALERT,
-  // REGISTER_USER_BEGIN,
-  // REGISTER_USER_SUCCESS,
-  // REGISTER_USER_ERROR,
-} from './actions';
 import reducer from './reducer';
 import axios from 'axios';
 
@@ -33,13 +26,13 @@ const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const displayAlert = () => {
-    dispatch({ type: DISPLAY_ALERT });
+    dispatch({ type: 'DISPLAY_ALERT' });
     clearAlert();
   };
 
   const clearAlert = () => {
     setTimeout(() => {
-      dispatch({ type: CLEAR_ALERT });
+      dispatch({ type: 'CLEAR_ALERT' });
     }, 5000);
   };
 
@@ -78,6 +71,29 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const loginUser = async (currentUser) => {
+    dispatch({ type: 'LOGIN_USER_BEGIN' });
+    try {
+      const response = await axios.post('/api/v1/auth/login', currentUser);
+      const { user, token, location } = response.data;
+      dispatch({
+        type: 'LOGIN_USER_SUCCESS',
+        payload: { user, token, location },
+      });
+      addUserToLocalStorage({
+        user,
+        token,
+        location,
+      });
+    } catch (error) {
+      dispatch({
+        type: 'LOGIN_USER_ERROR',
+        payload: { msg: error.response.data },
+      });
+    }
+    clearAlert();
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -85,6 +101,7 @@ const AppProvider = ({ children }) => {
         displayAlert,
         clearAlert,
         registerUser,
+        loginUser,
       }}
     >
       {children}
