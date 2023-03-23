@@ -2438,7 +2438,7 @@ return (
 
 #### Setup Links
 
-- create <b>utils</b>in the <b>src</b>
+- create <b>utils</b> in the <b>src</b>
 - setup links.js
 
 ```js
