@@ -3,8 +3,8 @@ import { StatusCodes } from 'http-status-codes';
 import { BadRequestError, UnauthenticatedError } from '../errors/index.js';
 
 const registerUser = async (req, res, next) => {
-  const { name, email, password } = req.body;
-
+  const { name, email, password } = req.body.currentUser;
+  
   if (!name || !email || !password) {
     throw new BadRequestError('Συμπλήρωσε όλα τα πεδία.');
   }

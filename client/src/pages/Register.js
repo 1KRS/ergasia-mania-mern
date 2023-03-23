@@ -14,11 +14,13 @@ const initialState = {
 const Register = () => {
   const navigate = useNavigate();
   const [values, setValues] = useState(initialState);
+  console.log('M1', values.isMember)
   const { user, isLoading, showAlert, displayAlert, registerUser, loginUser } =
     useAppContext();
 
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
+    console.log('M2', values.isMember)
   };
 
   const handleChange = (e) => {
@@ -28,8 +30,10 @@ const Register = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     const { name, email, password, isMember } = values;
+    console.log('M3', values.isMember)
 
     if (!email || !password || (!isMember && !name)) {
+      console.log('M4', values.isMember)
       displayAlert();
       return;
     }
@@ -38,6 +42,7 @@ const Register = () => {
 
     if (isMember) {
       console.log('Ήδη μέλος.');
+      console.log('M5', values.isMember)
       loginUser({email, password});
     } else {
       console.log('Στοιχεία (Values): ', values);

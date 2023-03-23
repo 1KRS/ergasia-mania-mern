@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import validator from 'validator';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -41,6 +41,10 @@ const UserSchema = new mongoose.Schema({
     trim: true,
     default: 'Η πόλη μου',
   },
+  hasRegistered: {
+    type: Boolean,
+    default: true,
+  },
   isMember: {
     type: Boolean,
     default: false,
@@ -59,8 +63,8 @@ UserSchema.methods.createJWT = function () {
 };
 
 UserSchema.methods.comparePassword = async function (candidatePassword) {
-  const isMatch = await bcrypt.compare(candidatePassword, this.password)
-  return isMatch
-}
+  const isMatch = await bcrypt.compare(candidatePassword, this.password);
+  return isMatch;
+};
 
 export default mongoose.model('User', UserSchema);

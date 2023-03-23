@@ -17,6 +17,7 @@ export const initialState = {
   showAlert: false,
   alertType: '',
   alertText: '',
+  showSidebar: false,
 };
 
 const AppContext = React.createContext();
@@ -71,6 +72,10 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const toggleSidebar = () => {
+    dispatch({ type: 'TOGGLE_SIDEBAR' });
+  };
+
   const loginUser = async (currentUser) => {
     dispatch({ type: 'LOGIN_USER_BEGIN' });
     try {
@@ -94,20 +99,27 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const logoutUser = () => {
+    dispatch({ type: 'LOGOUT_USER' });
+    removeUserFromLocalStorage();
+  };
+
   return (
     <AppContext.Provider
       value={{
         ...state,
         displayAlert,
-        clearAlert,
         registerUser,
+        toggleSidebar,
         loginUser,
+        logoutUser,
       }}
     >
       {children}
     </AppContext.Provider>
   );
 };
+
 // make sure use
 export const useAppContext = () => {
   return useContext(AppContext);
