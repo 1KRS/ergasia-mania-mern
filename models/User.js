@@ -31,7 +31,7 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'Παρακαλώ, γράψε έναν κωδικό.'],
-    minLength: 6,
+    minLength: 3,
     select: false,
   },
   location: {

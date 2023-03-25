@@ -7,6 +7,8 @@ import 'express-async-errors'; // Πρέπει να μπαίνει πριν το
 import jobsRouter from './routes/jobsRoutes.js';
 import authRouter from './routes/authRoutes.js';
 import morgan from 'morgan';
+import authenticateUser from './middleware/auth.js';
+
 
 dotenv.config();
 
@@ -29,7 +31,7 @@ app.get('/api/v1', (req, res) => {
 });
 
 app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/jobs', jobsRouter);
+app.use('/api/v1/jobs', authenticateUser, jobsRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

@@ -10,7 +10,7 @@ const location = localStorage.getItem('location');
 
 export const initialState = {
   user: user ? JSON.parse(user) : null,
-  token: token,
+  token: token || '',
   userLocation: location || '',
   jobLocation: location || '',
   isLoading: false,
@@ -35,6 +35,10 @@ const AppProvider = ({ children }) => {
     setTimeout(() => {
       dispatch({ type: 'CLEAR_ALERT' });
     }, 5000);
+  };
+
+  const toggleSidebar = () => {
+    dispatch({ type: 'TOGGLE_SIDEBAR' });
   };
 
   const addUserToLocalStorage = ({ user, token, location }) => {
@@ -70,10 +74,6 @@ const AppProvider = ({ children }) => {
       });
     }
     clearAlert();
-  };
-
-  const toggleSidebar = () => {
-    dispatch({ type: 'TOGGLE_SIDEBAR' });
   };
 
   const loginUser = async (currentUser) => {
