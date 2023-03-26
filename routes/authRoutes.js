@@ -4,9 +4,8 @@ import { registerUser, loginUser, updateUser} from '../controllers/authControlle
 
 const authRouter = express.Router()
 
-
-authRouter.route('/register').post(registerUser);
-authRouter.route('/login').post(loginUser);
-authRouter.route('/update').patch(authenticateUser, updateUser);
+authRouter.route('/registerUser').post(registerUser);
+authRouter.route('/loginUser').post(loginUser);
+authRouter.route('/updateUser').patch(authenticateUser, updateUser);
 
 export default authRouter;
