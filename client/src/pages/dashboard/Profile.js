@@ -13,8 +13,8 @@ const Profile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Remove while testing
     if (!name || !email || !lastName || !location) {
-      // test and remove temporary
       displayAlert();
       return;
     }

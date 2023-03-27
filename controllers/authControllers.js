@@ -1,13 +1,12 @@
 import User from '../models/User.js';
 import { StatusCodes } from 'http-status-codes';
 import { BadRequestError, UnauthenticatedError } from '../errors/index.js';
-// import { request } from 'express';
 
 const registerUser = async (req, res, next) => {
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) { 
-    throw new BadRequestError('Συμπλήρωσε όλα τα πεδία.'); // Ελέγχουμε τα στοιχεία που δηλώθηκαν. Εάν κάποιο λείπει στέλνουμε λάθος.
+    throw new BadRequestError('Συμπλήρωσε όλα τα πεδία. (1.Auth Controller)'); // Ελέγχουμε τα στοιχεία που δηλώθηκαν. Εάν κάποιο λείπει στέλνουμε λάθος.
   }
   const user = await User.create({ name, email, password });  // Δημιουργούμε νέο χρήστη
   const token = user.createJWT(); // Δημιουργούμε νέο αποδεικτικό
@@ -26,17 +25,17 @@ const registerUser = async (req, res, next) => {
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    throw new BadRequestError('Συμπλήρωσε όλα τα πεδία.'); // Ελέγχουμε τα στοιχεία που δηλώθηκαν. Εάν κάποιο λείπει στέλνουμε λάθος.
+    throw new BadRequestError('Συμπλήρωσε όλα τα πεδία. (2.Auth Controller)'); // Ελέγχουμε τα στοιχεία που δηλώθηκαν. Εάν κάποιο λείπει στέλνουμε λάθος.
   }
 
   const user = await User.findOne({ email }).select('+password'); // Ψάχνουμε τον χρήστη. Έπειτα προσθέτουμε και τον κωδικό χρήστη για να τον συγκρίνουμε παρακάτω.
   if (!user) {
-    throw new UnauthenticatedError('Λάθος στοιχεία.');
+    throw new UnauthenticatedError('Λάθος στοιχεία. (1.Auth Controller)');
   }
 
   const isPasswordCorrect = await user.comparePassword(password); // Συγκρίνουμε τους κωδικούς.
   if (!isPasswordCorrect) {
-    throw new UnauthenticatedError('Λάθος στοιχεία.');
+    throw new UnauthenticatedError('Λάθος στοιχεία. (2.Auth Controller)');
   }
 
   const token = user.createJWT(); // Δημιουργούμε νέο αποδεικτικό
@@ -48,7 +47,7 @@ const updateUser = async (req, res) => {
   const { name, lastName, email, location } = req.body;
 
   if (!email || !lastName || !email || !location) {
-    throw new BadRequestError('Συμπλήρωσε όλα τα πεδία.'); // Ελέγχουμε τα στοιχεία που δηλώθηκαν. Εάν κάποιο λείπει στέλνουμε λάθος.
+    throw new BadRequestError('Συμπλήρωσε όλα τα πεδία. (3.Auth Controller)'); // Ελέγχουμε τα στοιχεία που δηλώθηκαν. Εάν κάποιο λείπει στέλνουμε λάθος.
   }
 
   const user = await User.findOne({_id: req.user.userId})

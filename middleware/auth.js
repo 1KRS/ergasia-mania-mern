@@ -5,7 +5,7 @@ const auth = async (req, res, next) => {
   // check header
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer')) {
-    throw new UnauthenticatedError('Αποτυχία Αυθεντικοποίησης');
+    throw new UnauthenticatedError('Αποτυχία Αυθεντικοποίησης (1.Auth Middleware)');
   }
   const token = authHeader.split(' ')[1];
 
@@ -14,7 +14,7 @@ const auth = async (req, res, next) => {
     req.user = { userId: payload.userId }; // Αttach the user request object
     next();
   } catch (error) {
-    throw new UnauthenticatedError('Αποτυχία Αυθεντικοποίησης');
+    throw new UnauthenticatedError('Αποτυχία Αυθεντικοποίησης (2.Auth Middleware)');
   }
 };
 
