@@ -137,18 +137,23 @@ const AppProvider = ({ children }) => {
     dispatch({ type: 'UPDATE_USER_BEGIN' });
     try {
       const { data } = await authFetch.patch('/auth/updateUser', currentUser);
-      // No token
-      const { user, token, location } = data;
+
+      // no token
+      const { user, location } = data;
+
       dispatch({
         type: 'UPDATE_USER_SUCCESS',
-        payload: { user, token, location },
+        payload: { user, location, token },
       });
-      addUserToLocalStorage({ user, token, location });
+
+      addUserToLocalStorage({ user, location, token: initialState.token });
     } catch (error) {
-      dispatch({
-        type: 'UPDATE_USER_ERROR',
-        payload: { msg: error.response.data },
-      });
+      if (error.response.status !== 401) {
+        dispatch({
+          type: 'UPDATE_USER_ERROR',
+          payload: { msg: error.response.data },
+        });
+      }
     }
     clearAlert();
   };

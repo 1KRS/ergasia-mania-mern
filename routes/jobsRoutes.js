@@ -1,5 +1,5 @@
 import express from 'express'
-import { createJob, deleteJob, updateJob, getAllJobs, showStats } from '../controllers/jobsControllers.js'
+import { createJob, deleteJob, updateJob, getAllJobs, showStats } from '../controllers/jobsController.js'
 
 const jobsRouter = express.Router()
 
