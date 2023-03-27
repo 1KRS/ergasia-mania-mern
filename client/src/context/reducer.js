@@ -9,7 +9,7 @@ const reducer = (state, action) => {
       ...state,
       showAlert: true,
       alertType: 'danger',
-      alertText: 'Συμπλήρωσε όλα τα πεδία!',
+      alertText: 'Συμπλήρωσε όλα τα πεδία! (Reducer)',
     };
   }
   if (action.type === 'CLEAR_ALERT') {
@@ -77,6 +77,35 @@ const reducer = (state, action) => {
     };
   }
   if (action.type === 'LOGIN_USER_ERROR') {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'danger',
+      alertText: action.payload.msg,
+    };
+  }
+
+  if (action.type === 'UPDATE_USER_BEGIN') {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === 'UPDATE_USER_SUCCESS') {
+    return {
+      ...state,
+      user: action.payload.user,
+      token: action.payload.token,
+      userLocation: action.payload.location,
+      jobLocation: action.payload.location,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'success',
+      alertText: 'Τα Στοιχεία Χρήστη Ενημερώθηκαν!',
+    };
+  }
+  if (action.type === 'UPDATE_USER_ERROR') {
     return {
       ...state,
       isLoading: false,
