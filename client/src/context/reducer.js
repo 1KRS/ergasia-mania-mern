@@ -150,6 +150,23 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === 'GET_JOBS_BEGIN') {
+    return {
+      ...state,
+      isLoading: true,
+      showAlert: false,
+    };
+  }
+  if (action.type === 'GET_JOBS_SUCCESS') {
+    return {
+      ...state,
+      isLoading: false,
+      jobs: action.payload.jobs,
+      totalJobs: action.payload.totalJobs,
+      numOfPages: action.payload.numOfPages,
+    };
+  }
+
   if (action.type === 'HANDLE_CHANGE') {
     return {
       ...state,
@@ -164,7 +181,7 @@ const reducer = (state, action) => {
     initialState.company = '';
     initialState.jobLocation = state.userLocation;
     initialState.jobType = 'Πλήρης Απασχόληση';
-    initialState.status = 'Εκκρεμεί'
+    initialState.status = 'Εκκρεμεί';
     return {
       ...state,
       ...initialState,
