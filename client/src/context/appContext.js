@@ -12,12 +12,24 @@ export const initialState = {
   user: user ? JSON.parse(user) : null,
   token: token,
   userLocation: location || '',
-  jobLocation: location || '',
   isLoading: false,
   showAlert: false,
   alertType: '',
   alertText: '',
   showSidebar: false,
+  isEditing: false,
+  editJobId: '',
+  position: '',
+  company: '',
+  jobTypeOptions: ['Πλήρης Απασχόληση',
+  'Ημιαπασχόληση',
+  'Απομακρυσμένη',
+  'Πρακτική',
+  'Υβριδική'],
+  jobType: 'Πλήρης Απασχόληση',
+  statusOptions: ['Εκκρεμεί', 'Συνέντευξη', 'Απορρίφθηκε'],
+  status: 'Εκκρεμεί',
+  jobLocation: location || '',
 };
 
 const AppContext = React.createContext();
@@ -163,6 +175,45 @@ const AppProvider = ({ children }) => {
     removeUserFromLocalStorage();
   };
 
+  const createJob = async () => {
+    dispatch({ type: 'CREATE_JOB_BEGIN' });
+    try {
+      const { position, company, jobLocation, jobType, status } = state;
+
+      await authFetch.post('/jobs', {
+        company,
+        position,
+        jobLocation,
+        jobType,
+        status,
+      });
+      dispatch({
+        type: 'CREATE_JOB_SUCCESS',
+      });
+      clearValues();
+    } catch (error) {
+      if (error.response.status === 401) return;
+      dispatch({
+        type: 'CREATE_JOB_ERROR',
+        payload: { msg: error.response.data },
+      });
+    }
+    clearAlert();
+  };
+
+  const handleChange = ({ name, value }) => {
+    dispatch({
+      type: 'HANDLE_CHANGE',
+      payload: { name, value },
+    });
+  };
+
+  const clearValues = async () => {
+    await dispatch({
+      type: 'CLEAR_VALUES',
+    });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -173,6 +224,9 @@ const AppProvider = ({ children }) => {
         loginUser,
         updateUser,
         logoutUser,
+        createJob,
+        handleChange,
+        clearValues,
       }}
     >
       {children}

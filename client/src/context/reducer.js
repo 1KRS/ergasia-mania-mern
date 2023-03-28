@@ -1,7 +1,7 @@
 // Ο reducer αναλαμβάνει την αποθήκευση της εκάστοτε κατάστασης (state)
 // μέσα σε ολόκληρη την εφαρμογή ανάλογα με την ενέργεια που περνάμε.
 
-import { initialState } from "./appContext";
+import { initialState } from './appContext';
 
 const reducer = (state, action) => {
   if (action.type === 'DISPLAY_ALERT') {
@@ -124,6 +124,52 @@ const reducer = (state, action) => {
       jobLocation: '',
     };
   }
-  throw new Error(`no such action :${action.type}`);
+
+  if (action.type === 'CREATE_JOB_BEGIN') {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === 'CREATE_JOB_SUCCESS') {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'success',
+      alertText: 'Η Εργασία Προστέθηκε!',
+    };
+  }
+  if (action.type === 'CREATE_JOB_ERROR') {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'danger',
+      alertText: action.payload.msg,
+    };
+  }
+
+  if (action.type === 'HANDLE_CHANGE') {
+    return {
+      ...state,
+      [action.payload.name]: action.payload.value,
+    };
+  }
+
+  if (action.type === 'CLEAR_VALUES') {
+    initialState.isEditing = false;
+    initialState.editJobId = '';
+    initialState.position = '';
+    initialState.company = '';
+    initialState.jobLocation = state.userLocation;
+    initialState.jobType = 'Πλήρης Απασχόληση';
+    initialState.status = 'Εκκρεμεί'
+    return {
+      ...state,
+      ...initialState,
+    };
+  }
+  throw new Error(`Η ενέργεια ${action.type} δεν υπάρχει.`);
 };
 export default reducer;

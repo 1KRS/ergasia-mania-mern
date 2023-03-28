@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 const errorHandlerMiddleware = (error, req, res, next) => {
   console.log(error.message);
   const errorObj = {
-    statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
+    statusCode: error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
     message: error.message || `Υπήρξε κάποιο πρόβλημα. Δοκιμάστε ξανά σε λίγο. (Error Handler Middleware)`
   };
   if (error.name === 'ValidationError') {

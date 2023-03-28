@@ -2,6 +2,13 @@ import mongoose from 'mongoose';
 
 const JobSchema = new mongoose.Schema(
   {
+    position: {
+      type: String,
+      required: [true, 'Παρακαλώ, γράψε τη θέση εργασίας.'],
+      minLength: 5,
+      maxLength: 100,
+      trim: true,
+    },
     company: {
       type: String,
       required: [true, 'Παρακαλώ, γράψε το όνομα της εταιρείας.'],
@@ -9,16 +16,9 @@ const JobSchema = new mongoose.Schema(
       maxLength: 20,
       trim: true,
     },
-    position: {
-      type: String,
-      required: [true, 'Παρακαλώ, γράψε τη θέση εργασίας.'],
-      minLength: 10,
-      maxLength: 100,
-      trim: true,
-    },
     status: {
       type: String,
-      enum: ['Συνέντευξη', 'Εκκρεμεί', 'Απορρίφθηκε'],
+      enum: ['Εκκρεμεί', 'Συνέντευξη', 'Απορρίφθηκε'],
       default: 'Εκκρεμεί',
     },
     jobType: {
@@ -34,7 +34,7 @@ const JobSchema = new mongoose.Schema(
     },
     jobLocation: {
       type: String,
-      default: 'my city',
+      default: 'Η Πόλη Μου',
       required: true,
     },
     createdBy: {

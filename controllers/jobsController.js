@@ -6,7 +6,7 @@ const createJob = async (req, res) => {
   const { position, company } = req.body;
 
   if (!position || !company) {
-    throw new BadRequestError('Please Provide All Values');
+    throw new BadRequestError('Συμπλήρωσε όλα τα πεδία! (JobController)');
   }
 
   req.body.createdBy = req.user.userId;
