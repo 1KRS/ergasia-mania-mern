@@ -21,13 +21,17 @@ export const initialState = {
   editJobId: '',
   position: '',
   company: '',
-  jobTypeOptions: ['Πλήρης Απασχόληση',
-  'Ημιαπασχόληση',
-  'Απομακρυσμένη',
-  'Πρακτική',
-  'Υβριδική'],
+  jobTypeOptions: [
+    'Σύμβουλος',
+    'Συνεργασία',
+    'Πλήρης Απασχόληση',
+    'Ημιαπασχόληση',
+    'Υβριδική',
+    'Απομακρυσμένη',
+    'Πρακτική',
+  ],
   jobType: 'Πλήρης Απασχόληση',
-  statusOptions: ['Εκκρεμεί', 'Συνέντευξη', 'Απορρίφθηκε'],
+  statusOptions: ['Εκκρεμεί', 'Συνέντευξη', 'Απορρίφθηκε', 'Εγκρίθηκε'],
   status: 'Εκκρεμεί',
   jobLocation: location || '',
   jobs: [],
@@ -206,23 +210,23 @@ const AppProvider = ({ children }) => {
   };
 
   const setEditJob = (id) => {
-    dispatch({ type: 'SET_EDIT_JOB', payload: { id } })
-  }
+    dispatch({ type: 'SET_EDIT_JOB', payload: { id } });
+  };
   const editJob = () => {
-    console.log('edit job')
-  }
-  
-  const deleteJob = (id) =>{
-    console.log(`delete : ${id}`)
-  }
+    console.log('edit job');
+  };
+
+  const deleteJob = (id) => {
+    console.log(`delete : ${id}`);
+  };
 
   const getJobs = async () => {
-    let url = `/jobs`
-  
-    dispatch({ type: 'GET_JOBS_BEGIN' })
+    let url = `/jobs`;
+
+    dispatch({ type: 'GET_JOBS_BEGIN' });
     try {
-      const { data } = await authFetch.get(url)
-      const { jobs, totalJobs, numOfPages } = data
+      const { data } = await authFetch.get(url);
+      const { jobs, totalJobs, numOfPages } = data;
       dispatch({
         type: 'GET_JOBS_SUCCESS',
         payload: {
@@ -230,13 +234,13 @@ const AppProvider = ({ children }) => {
           totalJobs,
           numOfPages,
         },
-      })
+      });
     } catch (error) {
-      console.log(error.response)
-      logoutUser()
+      console.log(error.response);
+      logoutUser();
     }
-    clearAlert()
-  }
+    clearAlert();
+  };
 
   const handleChange = ({ name, value }) => {
     dispatch({
