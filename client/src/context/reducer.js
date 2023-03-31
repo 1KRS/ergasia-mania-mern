@@ -149,6 +149,7 @@ const reducer = (state, action) => {
       alertText: action.payload.msg,
     };
   }
+
   if (action.type === 'EDIT_JOB_SET_ID') {
     const job = state.jobs.find((job) => job._id === action.payload.id);
     const { _id, position, company, jobLocation, jobType, status } = job;
@@ -163,7 +164,6 @@ const reducer = (state, action) => {
       status,
     };
   }
-
   if (action.type === 'EDIT_JOB_BEGIN') {
     return { ...state, isLoading: true };
   }
@@ -199,7 +199,7 @@ const reducer = (state, action) => {
   //   };
   // }
 
-  if (action.type === 'GET_JOBS_BEGIN') {
+  if (action.type === 'GET_JOBS_BEGIN') { 
     return {
       ...state,
       isLoading: true,
@@ -213,6 +213,22 @@ const reducer = (state, action) => {
       jobs: action.payload.jobs,
       totalJobs: action.payload.totalJobs,
       numOfPages: action.payload.numOfPages,
+    };
+  }
+
+  if (action.type === 'SHOW_STATS_BEGIN') {
+    return {
+      ...state,
+      isLoading: true,
+      showAlert: false,
+    };
+  }
+  if (action.type === 'SHOW_STATS_SUCCESS') {
+    return {
+      ...state,
+      isLoading: false,
+      stats: action.payload.stats,
+      monthlyApplications: action.payload.monthlyApplications,
     };
   }
 

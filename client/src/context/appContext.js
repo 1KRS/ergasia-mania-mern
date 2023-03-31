@@ -38,6 +38,8 @@ export const initialState = {
   totalJobs: 0,
   numOfPages: 1,
   page: 1,
+  stats: {},
+  monthlyApplications: [],
 };
 
 const AppContext = React.createContext();
@@ -216,7 +218,8 @@ const AppProvider = ({ children }) => {
   const editJob = async () => {
     dispatch({ type: 'EDIT_JOB_BEGIN' });
     try {
-      const { editJobId, position, company, jobLocation, jobType, status } = state;
+      const { editJobId, position, company, jobLocation, jobType, status } =
+        state;
 
       await authFetch.patch(`/jobs/${editJobId}`, {
         company,
@@ -273,6 +276,24 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const showStats = async () => {
+    dispatch({ type: 'SHOW_STATS_BEGIN' });
+    try {
+      const { data } = await authFetch('/jobs/stats');
+      dispatch({
+        type: 'SHOW_STATS_SUCCESS',
+        payload: {
+          stats: data.defaultStats,
+          monthlyApplications: data.monthlyApplications,
+        },
+      });
+    } catch (error) {
+      console.log(error.response);
+      // logoutUser()
+    }
+    clearAlert();
+  };
+
   const handleChange = ({ name, value }) => {
     dispatch({
       type: 'HANDLE_CHANGE',
@@ -301,6 +322,7 @@ const AppProvider = ({ children }) => {
         editJob,
         deleteJob,
         getJobs,
+        showStats,
         handleChange,
         clearValues,
       }}
