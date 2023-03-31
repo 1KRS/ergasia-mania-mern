@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import Job from '../models/Job.js';
 import { StatusCodes } from 'http-status-codes';
 import { BadRequestError, NotFoundError } from '../errors/index.js';
@@ -64,7 +65,30 @@ const getAllJobs = async (req, res) => {
 };
 
 const showStats = async (req, res) => {
-  res.send('Show Stats');
+  let stats = await Job.aggregate([
+    { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
+    { $group: { _id: '$status', count: { $sum: 1 } } },
+  ]);
+
+  stats = stats.reduce((acc, curr) => {
+    const { _id: title, count } = curr;
+    acc[title] = count;
+    return acc;
+  }, {});
+
+  const defaultStats = {
+    Εκκρεμεί: stats.Εκκρεμεί || 0,
+    Συνέντευξη: stats.Συνέντευξη || 0,
+    Απορρίφθηκε: stats.Απορρίφθηκε || 0,
+    Εγκρίθηκε: stats.Εγκρίθηκε || 0,
+  };
+
+  let monthlyApplications = [];
+
+  res.status(StatusCodes.OK).json({ 
+    // stats,
+     defaultStats, monthlyApplications 
+    });
 };
 
 export { createJob, deleteJob, updateJob, getAllJobs, showStats };
