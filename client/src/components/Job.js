@@ -14,7 +14,7 @@ const Job = ({
   createdAt,
   status,
 }) => {
-  const { setEditJob, deleteJob } = useAppContext();
+  const { setEditJobId, deleteJob } = useAppContext();
   let date = DateTime.fromISO(createdAt).toFormat('DD');
 
   return (
@@ -29,15 +29,15 @@ const Job = ({
       <div className="content">
         <div className="content-center">
           <JobInfo icon={<FaLocationArrow />} text={jobLocation} />
-          <JobInfo icon={<FaCalendarAlt />} text={date} />
+          <JobInfo icon={<FaCalendarAlt />}  text={date} />
           <JobInfo icon={<FaBriefcase />} text={jobType} />
-          <div className={`status ${status}`}>{status}</div>
+          <div className={`status ${status}`} >{status}</div>
         </div>
         <footer>
           <div className="actions">
             <Link
               to="/add-job"
-              onClick={() => setEditJob(_id)}
+              onClick={() => setEditJobId(_id)}
               className="btn edit-btn"
             >
               Αλλαγή
@@ -97,17 +97,21 @@ const Wrapper = styled.article`
       letter-spacing: var(--letterSpacing);
     }
   }
-  .pending {
+  .pending, .Εκκρεμεί {
     background: #fcefc7;
     color: #e9b949;
   }
-  .interview {
+  .interview, .Συνέντευξη{
     background: #e0e8f9;
     color: #647acb;
   }
-  .declined {
+  .declined, .Απορρίφθηκε{
     color: #d66a6a;
     background: #ffeeee;
+  }
+  .approved, .Εγκρίθηκε{
+    color: #0f5132;
+    background: #d1e7dd;
   }
   .content {
     padding: 1rem 1.5rem;
@@ -128,12 +132,15 @@ const Wrapper = styled.article`
   }
 
   .status {
+    margin: 0.25rem 0 0.25rem;
+    padding-top: 0.1rem;
     border-radius: var(--borderRadius);
     text-transform: capitalize;
     letter-spacing: var(--letterSpacing);
     text-align: center;
-    width: 100px;
+    width: 150px;
     height: 30px;
+    align-items: end;
   }
   footer {
     margin-top: 1rem;

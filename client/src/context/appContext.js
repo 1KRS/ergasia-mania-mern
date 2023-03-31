@@ -209,15 +209,46 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
-  const setEditJob = (id) => {
-    dispatch({ type: 'SET_EDIT_JOB', payload: { id } });
-  };
-  const editJob = () => {
-    console.log('edit job');
+  const setEditJobId = (id) => {
+    dispatch({ type: 'EDIT_JOB_SET_ID', payload: { id } });
   };
 
-  const deleteJob = (id) => {
-    console.log(`delete : ${id}`);
+  const editJob = async () => {
+    dispatch({ type: 'EDIT_JOB_BEGIN' });
+    try {
+      const { editJobId, position, company, jobLocation, jobType, status } = state;
+
+      await authFetch.patch(`/jobs/${editJobId}`, {
+        company,
+        position,
+        jobLocation,
+        jobType,
+        status,
+      });
+      dispatch({
+        type: 'EDIT_JOB_SUCCESS',
+      });
+      clearValues();
+    } catch (error) {
+      if (error.response.status === 401) return;
+      dispatch({
+        type: 'EDIT_JOB_ERROR',
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
+  };
+
+  const deleteJob = async (jobId) => {
+    dispatch({ type: 'DELETE_JOB_BEGIN' });
+    try {
+      await authFetch.delete(`/jobs/${jobId}`);
+      getJobs();
+      // dispatch({ type: 'DELETE_JOB_SUCCESS' });
+      clearAlert();
+    } catch (error) {
+      logoutUser();
+    }
   };
 
   const getJobs = async () => {
@@ -266,7 +297,7 @@ const AppProvider = ({ children }) => {
         updateUser,
         logoutUser,
         createJob,
-        setEditJob,
+        setEditJobId,
         editJob,
         deleteJob,
         getJobs,

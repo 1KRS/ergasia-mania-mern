@@ -149,7 +149,7 @@ const reducer = (state, action) => {
       alertText: action.payload.msg,
     };
   }
-  if (action.type === 'SET_EDIT_JOB') {
+  if (action.type === 'EDIT_JOB_SET_ID') {
     const job = state.jobs.find((job) => job._id === action.payload.id);
     const { _id, position, company, jobLocation, jobType, status } = job;
     return {
@@ -163,6 +163,41 @@ const reducer = (state, action) => {
       status,
     };
   }
+
+  if (action.type === 'EDIT_JOB_BEGIN') {
+    return { ...state, isLoading: true };
+  }
+  if (action.type === 'EDIT_JOB_SUCCESS') {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'success',
+      alertText: 'Η Εργασία Ενημερώθηκε!',
+    };
+  }
+  if (action.type === 'EDIT_JOB_ERROR') {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'danger',
+      alertText: action.payload.msg,
+    };
+  }
+
+  if (action.type === 'DELETE_JOB_BEGIN') {
+    return { ...state, isLoading: true };
+  }
+  // if (action.type === 'DELETE_JOB_SUCCESS') {
+  //   return {
+  //     ...state,
+  //     isLoading: false,
+  //     showAlert: true,
+  //     alertType: 'success',
+  //     alertText: 'Η Εργασία Διαγράφτηκε!',
+  //   };
+  // }
 
   if (action.type === 'GET_JOBS_BEGIN') {
     return {
