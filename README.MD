@@ -4499,8 +4499,8 @@ monthlyApplications = monthlyApplications
 
 #### Charts Container
 
-- BarChart.js
-- AreaChart.js
+- BarChartComponent.js
+- AreaChartComponent.js
 
 ```js
 ChartsContainer.js;
@@ -4538,10 +4538,10 @@ export default function ChartsContainer() {
 npm install recharts
 ```
 
-#### Bar Chart
+#### Bar Chart Component
 
 ```js
-BarChart.js;
+BarChartComponent.js;
 
 import {
   BarChart,
@@ -4573,9 +4573,11 @@ const BarChartComponent = ({ data }) => {
 };
 ```
 
-#### Area Chart
+#### Area Chart Component
 
 ```js
+AreaChartComponent.js;
+
 import {
   ResponsiveContainer,
   AreaChart,

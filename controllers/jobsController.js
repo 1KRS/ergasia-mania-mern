@@ -84,8 +84,6 @@ const showStats = async (req, res) => {
     Εγκρίθηκε: stats.Εγκρίθηκε || 0,
   };
 
-  // let monthlyApplications = []
-
   let monthlyApplications = await Job.aggregate([
     { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
     {
@@ -110,15 +108,10 @@ const showStats = async (req, res) => {
         _id: { year, month },
         count,
       } = item;
-      
-      // accepts 0-11
-      // const date = moment()
-      //   .month(month - 1)
-      //   .year(year)
-      //   .format('MMM Y');
-      
-      const date = DateTime.fromObject({month: month, year: year})
-      .toFormat('MMM y');
+
+      const date = DateTime.fromObject({ month: month, year: year })
+        .setLocale('el')
+        .toFormat('MMM y');
 
       return { date, count };
     })
