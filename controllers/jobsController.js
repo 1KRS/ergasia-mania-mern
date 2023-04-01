@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import Job from '../models/Job.js';
+import { DateTime } from 'luxon';
 import { StatusCodes } from 'http-status-codes';
 import { BadRequestError, NotFoundError } from '../errors/index.js';
 import checkPermissions from '../utils/checkPermissions.js';
@@ -83,12 +84,51 @@ const showStats = async (req, res) => {
     Εγκρίθηκε: stats.Εγκρίθηκε || 0,
   };
 
-  let monthlyApplications = [];
+  // let monthlyApplications = []
 
-  res.status(StatusCodes.OK).json({ 
+  let monthlyApplications = await Job.aggregate([
+    { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
+    {
+      $group: {
+        _id: {
+          year: {
+            $year: '$createdAt',
+          },
+          month: {
+            $month: '$createdAt',
+          },
+        },
+        count: { $sum: 1 },
+      },
+    },
+    { $sort: { '_id.year': -1, '_id.month': -1 } },
+    { $limit: 6 },
+  ]);
+  monthlyApplications = monthlyApplications
+    .map((item) => {
+      const {
+        _id: { year, month },
+        count,
+      } = item;
+      
+      // accepts 0-11
+      // const date = moment()
+      //   .month(month - 1)
+      //   .year(year)
+      //   .format('MMM Y');
+      
+      const date = DateTime.fromObject({month: month, year: year})
+      .toFormat('MMM y');
+
+      return { date, count };
+    })
+    .reverse();
+
+  res.status(StatusCodes.OK).json({
     // stats,
-     defaultStats, monthlyApplications 
-    });
+    defaultStats,
+    monthlyApplications,
+  });
 };
 
 export { createJob, deleteJob, updateJob, getAllJobs, showStats };
