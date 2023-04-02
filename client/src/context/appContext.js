@@ -252,7 +252,6 @@ const AppProvider = ({ children }) => {
     try {
       await authFetch.delete(`/jobs/${jobId}`);
       getJobs();
-      // dispatch({ type: 'DELETE_JOB_SUCCESS' });
       clearAlert();
     } catch (error) {
       logoutUser();
@@ -260,8 +259,8 @@ const AppProvider = ({ children }) => {
   };
 
   const getJobs = async () => {
-    const { search, searchStatus, searchType, sort } = state;
-  let url = `/jobs?status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
+    const { page, search, searchStatus, searchType, sort } = state;
+  let url = `/jobs?page=${page}&status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
   if (search) {
     url = url + `&search=${search}`;
   }
@@ -321,6 +320,10 @@ const AppProvider = ({ children }) => {
     });
   };
 
+  const changePage = (page) => {
+    dispatch({ type: 'CHANGE_PAGE', payload: { page } })
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -340,6 +343,7 @@ const AppProvider = ({ children }) => {
         handleChange,
         clearValues,
         clearFilters,
+        changePage
       }}
     >
       {children}

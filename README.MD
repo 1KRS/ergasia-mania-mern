@@ -5236,14 +5236,17 @@ return (
 
 ```js
 actions.js;
+
 export const CHANGE_PAGE = 'CHANGE_PAGE';
 ```
 
 ```js
 appContext.js
+
 const changePage = (page) => {
   dispatch({ type: CHANGE_PAGE, payload: { page } })
 }
+
 value={{changePage}}
 ```
 
@@ -5275,6 +5278,7 @@ return (
 
 ```js
 PageBtnContainer.js;
+
 const prevPage = () => {
   let newPage = page - 1;
   if (newPage < 1) {
@@ -5342,6 +5346,7 @@ if (action.type === HANDLE_CHANGE) {
 
 ```js
 package.json
+
 "scripts": {
     "build-client": "cd client && npm run build",
     "server": "nodemon server.js --ignore client",

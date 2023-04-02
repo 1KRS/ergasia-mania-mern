@@ -189,17 +189,8 @@ const reducer = (state, action) => {
   if (action.type === 'DELETE_JOB_BEGIN') {
     return { ...state, isLoading: true };
   }
-  // if (action.type === 'DELETE_JOB_SUCCESS') {
-  //   return {
-  //     ...state,
-  //     isLoading: false,
-  //     showAlert: true,
-  //     alertType: 'success',
-  //     alertText: 'Η Εργασία Διαγράφτηκε!',
-  //   };
-  // }
 
-  if (action.type === 'GET_JOBS_BEGIN') { 
+  if (action.type === 'GET_JOBS_BEGIN') {
     return {
       ...state,
       isLoading: true,
@@ -235,6 +226,7 @@ const reducer = (state, action) => {
   if (action.type === 'HANDLE_CHANGE') {
     return {
       ...state,
+      page: 1,
       [action.payload.name]: action.payload.value,
     };
   }
@@ -252,6 +244,7 @@ const reducer = (state, action) => {
       ...initialState,
     };
   }
+
   if (action.type === 'CLEAR_FILTERS') {
     return {
       ...state,
@@ -260,6 +253,10 @@ const reducer = (state, action) => {
       searchType: 'Όλα',
       sort: 'Νεότερες',
     };
+  }
+
+  if (action.type === 'CHANGE_PAGE') {
+    return { ...state, page: action.payload.page };
   }
   throw new Error(`Η ενέργεια ${action.type} δεν υπάρχει.`);
 };
