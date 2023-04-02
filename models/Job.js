@@ -13,7 +13,7 @@ const JobSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Παρακαλώ, γράψε το όνομα της εταιρείας.'],
       minLength: 2,
-      maxLength: 20,
+      maxLength: 50,
       trim: true,
     },
     status: {
