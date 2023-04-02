@@ -40,7 +40,7 @@ const Wrapper = styled.section`
     margin-bottom: 1.75rem;
   }
   h5 {
-    margin: 1rem 0 -2.5rem 0;
+    margin: 1rem 0 0.5rem 0;
   }
   .recharts-surface {
     padding-right: 2.5rem;

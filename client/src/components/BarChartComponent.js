@@ -14,7 +14,7 @@ const BarChartComponent = ({ data }) => {
       <BarChart
         data={data}
         margin={{
-          top: 50,
+          top: 0,
         }}
       >
         <CartesianGrid strokeDasharray='3 3' />
