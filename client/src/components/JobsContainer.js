@@ -5,10 +5,19 @@ import Job from './Job';
 import styled from 'styled-components';
 
 const JobsContainer = () => {
-  const { getJobs, jobs, isLoading, /*page,*/ totalJobs } = useAppContext();
+  const {
+    getJobs,
+    jobs,
+    isLoading,
+    /*page,*/ totalJobs,
+    search,
+    searchStatus,
+    searchType,
+    sort,
+  } = useAppContext();
   useEffect(() => {
     getJobs();
-  }, []);
+  }, [search, searchStatus, searchType, sort]);
 
   if (isLoading) {
     return <Loading center />;
@@ -23,9 +32,10 @@ const JobsContainer = () => {
   return (
     <Wrapper>
       <h5>
-      {jobs.length > 1 ? 'Βρέθηκαν' : 'Βρέθηκε'} {totalJobs} {jobs.length > 1 ? 'εργασίες.' : 'εργασία.'}
+        {jobs.length > 1 ? 'Βρέθηκαν' : 'Βρέθηκε'} {totalJobs}{' '}
+        {jobs.length > 1 ? 'εργασίες.' : 'εργασία.'}
       </h5>
-      <div className='jobs'>
+      <div className="jobs">
         {jobs.map((job) => {
           return <Job key={job._id} {...job} />;
         })}
@@ -57,6 +67,6 @@ const Wrapper = styled.section`
       gap: 1rem;
     }
   }
-`
+`;
 
 export default JobsContainer;

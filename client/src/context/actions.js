@@ -40,3 +40,5 @@ export const SHOW_STATS_SUCCESS = 'SHOW_STATS_SUCCESS';
 export const HANDLE_CHANGE = 'HANDLE_CHANGE';
 
 export const CLEAR_VALUES = 'CLEAR_VALUES';
+
+export const CLEAR_FILTERS = 'CLEAR_FILTERS';

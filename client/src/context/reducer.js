@@ -252,6 +252,15 @@ const reducer = (state, action) => {
       ...initialState,
     };
   }
+  if (action.type === 'CLEAR_FILTERS') {
+    return {
+      ...state,
+      search: '',
+      searchStatus: 'Όλα',
+      searchType: 'Όλα',
+      sort: 'Νεότερες',
+    };
+  }
   throw new Error(`Η ενέργεια ${action.type} δεν υπάρχει.`);
 };
 export default reducer;

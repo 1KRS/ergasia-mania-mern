@@ -40,6 +40,11 @@ export const initialState = {
   page: 1,
   stats: {},
   monthlyApplications: [],
+  search: '',
+  searchStatus: 'Όλα',
+  searchType: 'Όλα',
+  sort: 'Νεότερες',
+  sortOptions: ['Νεότερες', 'Παλαιότερες', 'Α -> Ω', 'Ω -> Α'],
 };
 
 const AppContext = React.createContext();
@@ -255,20 +260,23 @@ const AppProvider = ({ children }) => {
   };
 
   const getJobs = async () => {
-    let url = `/jobs`;
-
-    dispatch({ type: 'GET_JOBS_BEGIN' });
-    try {
-      const { data } = await authFetch.get(url);
-      const { jobs, totalJobs, numOfPages } = data;
-      dispatch({
-        type: 'GET_JOBS_SUCCESS',
-        payload: {
-          jobs,
-          totalJobs,
-          numOfPages,
-        },
-      });
+    const { search, searchStatus, searchType, sort } = state;
+  let url = `/jobs?status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
+  if (search) {
+    url = url + `&search=${search}`;
+  }
+  dispatch({ type: 'GET_JOBS_BEGIN' });
+  try {
+    const { data } = await authFetch(url);
+    const { jobs, totalJobs, numOfPages } = data;
+    dispatch({
+      type: 'GET_JOBS_SUCCESS',
+      payload: {
+        jobs,
+        totalJobs,
+        numOfPages,
+      },
+    });
     } catch (error) {
       console.log(error.response);
       logoutUser();
@@ -307,6 +315,12 @@ const AppProvider = ({ children }) => {
     });
   };
 
+  const clearFilters = () => {
+    dispatch({
+      type: 'CLEAR_FILTERS',
+    });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -325,6 +339,7 @@ const AppProvider = ({ children }) => {
         showStats,
         handleChange,
         clearValues,
+        clearFilters,
       }}
     >
       {children}
