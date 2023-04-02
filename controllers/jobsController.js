@@ -80,8 +80,6 @@ const getAllJobs = async (req, res) => {
   // NO AWAIT
   let result = Job.find(queryObject);
 
-  console.log('QO', queryObject, result);
-
   // chain sort conditions
   if (sort === 'Νεότερες' || sort === 'Latest') {
     result = result.sort('-createdAt');
