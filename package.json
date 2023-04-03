@@ -5,10 +5,13 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
+    "build-client": "cd client && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server --ignore client",
-    "client": "npm start --prefix client",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \" npm run client\""
+    "dev-client": "npm start --prefix client",
+    "dev-start": "concurrently --kill-others-on-fail \"npm run server\" \" npm run dev-client\"",
+    "client": "cd client && npm run start",
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
