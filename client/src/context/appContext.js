@@ -241,7 +241,7 @@ const AppProvider = ({ children }) => {
       if (error.response.status === 401) return;
       dispatch({
         type: 'EDIT_JOB_ERROR',
-        payload: { msg: error.response.data.msg },
+        payload: { msg: error.response.data },
       });
     }
     clearAlert();
@@ -254,28 +254,32 @@ const AppProvider = ({ children }) => {
       getJobs();
       clearAlert();
     } catch (error) {
-      logoutUser();
+      if (error.response.status === 401) return;
+      dispatch({
+        type: 'DELETE_JOB_ERROR',
+        payload: { msg: error.response.data },
+      });
     }
   };
 
   const getJobs = async () => {
     const { page, search, searchStatus, searchType, sort } = state;
-  let url = `/jobs?page=${page}&status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
-  if (search) {
-    url = url + `&search=${search}`;
-  }
-  dispatch({ type: 'GET_JOBS_BEGIN' });
-  try {
-    const { data } = await authFetch(url);
-    const { jobs, totalJobs, numOfPages } = data;
-    dispatch({
-      type: 'GET_JOBS_SUCCESS',
-      payload: {
-        jobs,
-        totalJobs,
-        numOfPages,
-      },
-    });
+    let url = `/jobs?page=${page}&status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
+    if (search) {
+      url = url + `&search=${search}`;
+    }
+    dispatch({ type: 'GET_JOBS_BEGIN' });
+    try {
+      const { data } = await authFetch(url);
+      const { jobs, totalJobs, numOfPages } = data;
+      dispatch({
+        type: 'GET_JOBS_SUCCESS',
+        payload: {
+          jobs,
+          totalJobs,
+          numOfPages,
+        },
+      });
     } catch (error) {
       logoutUser();
     }
@@ -294,7 +298,7 @@ const AppProvider = ({ children }) => {
         },
       });
     } catch (error) {
-      logoutUser()
+      logoutUser();
     }
     clearAlert();
   };
@@ -319,8 +323,8 @@ const AppProvider = ({ children }) => {
   };
 
   const changePage = (page) => {
-    dispatch({ type: 'CHANGE_PAGE', payload: { page } })
-  }
+    dispatch({ type: 'CHANGE_PAGE', payload: { page } });
+  };
 
   return (
     <AppContext.Provider
@@ -341,7 +345,7 @@ const AppProvider = ({ children }) => {
         handleChange,
         clearValues,
         clearFilters,
-        changePage
+        changePage,
       }}
     >
       {children}

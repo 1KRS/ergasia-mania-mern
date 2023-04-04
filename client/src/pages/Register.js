@@ -64,7 +64,7 @@ const Register = () => {
             name="name"
             value={values.name}
             handleChange={handleChange}
-            labelText='Όνομα'
+            labelText="Όνομα"
           />
         )}
         <FormRow
@@ -72,17 +72,30 @@ const Register = () => {
           name="email"
           value={values.email}
           handleChange={handleChange}
-          labelText='Ηλ. Ταχυδρομείο'
+          labelText="Ηλ. Ταχυδρομείο"
         />
         <FormRow
           type="password"
           name="password"
           value={values.password}
           handleChange={handleChange}
-          labelText='Κωδικός'
+          labelText="Κωδικός"
         />
         <button type="submit" className="btn btn-block" disabled={isLoading}>
-        {values.isMember ? 'Σύνδεση' : 'Εγγραφή'}
+          {values.isMember ? 'Σύνδεση' : 'Εγγραφή'}
+        </button>
+        <button
+          type="button"
+          className="btn btn-block btn-hipster"
+          disabled={isLoading}
+          onClick={() => {
+            loginUser({
+              email: 'test@test.gr',
+              password: 'secret',
+            });
+          }}
+        >
+          {isLoading ? 'Φόρτωση...' : 'Επίδειξη Εφαρμογής'}
         </button>
         <p>
           {values.isMember ? 'Δεν είσαι μέλος; ' : 'Είσαι ήδη μέλος; '}

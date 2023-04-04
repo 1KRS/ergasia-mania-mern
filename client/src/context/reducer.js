@@ -189,6 +189,15 @@ const reducer = (state, action) => {
   if (action.type === 'DELETE_JOB_BEGIN') {
     return { ...state, isLoading: true };
   }
+  if (action.type === 'DELETE_JOB_ERROR') {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'danger',
+      alertText: action.payload.msg,
+    };
+  }
 
   if (action.type === 'GET_JOBS_BEGIN') {
     return {
