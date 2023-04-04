@@ -1,17 +1,13 @@
 // Εδώ περνάμε όλες τις καταστάσεις και τις λειτουργίες σε όλα τα επίπεδα της εφαρμογής.
 
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer, useContext, useEffect } from 'react';
 import reducer from './reducer';
 import axios from 'axios';
 
-const user = localStorage.getItem('user');
-const token = localStorage.getItem('token');
-const location = localStorage.getItem('location');
-
 export const initialState = {
-  user: user ? JSON.parse(user) : null,
-  token: token,
-  userLocation: location || '',
+  user: null,
+  userLocation: '',
+  userLoading: true,
   isLoading: false,
   showAlert: false,
   alertType: '',
@@ -33,7 +29,7 @@ export const initialState = {
   jobType: 'Πλήρης Απασχόληση',
   statusOptions: ['Εκκρεμεί', 'Συνέντευξη', 'Απορρίφθηκε', 'Εγκρίθηκε'],
   status: 'Εκκρεμεί',
-  jobLocation: location || '',
+  jobLocation: '',
   jobs: [],
   totalJobs: 0,
   numOfPages: 1,
@@ -60,15 +56,6 @@ const AppProvider = ({ children }) => {
   });
 
   // request interceptor
-  authFetch.interceptors.request.use(
-    (config) => {
-      config.headers['Authorization'] = `Bearer ${state.token}`;
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
 
   // response interceptor
   authFetch.interceptors.response.use(
@@ -99,16 +86,19 @@ const AppProvider = ({ children }) => {
     dispatch({ type: 'TOGGLE_SIDEBAR' });
   };
 
-  const addUserToLocalStorage = ({ user, token, location }) => {
-    localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('token', token);
-    localStorage.setItem('location', location);
-  };
-
-  const removeUserFromLocalStorage = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    localStorage.removeItem('location');
+  const getCurrentUser = async (user) => {
+    dispatch({ type: 'GET_CURRENT_USER_BEGIN' });
+    try {
+      const { data } = await authFetch('/auth/getCurrentUser');
+      const { user, location } = data;
+      dispatch({
+        type: 'GET_CURRENT_USER_SUCCESS',
+        payload: { user, location },
+      });
+    } catch (error) {
+      if (error.response.status === 401) return;
+      logoutUser();
+    }
   };
 
   const registerUser = async (currentUser) => {
@@ -118,15 +108,10 @@ const AppProvider = ({ children }) => {
         '/api/v1/auth/registerUser',
         currentUser
       );
-      const { user, token, location } = response.data;
+      const { user, location } = response.data;
       dispatch({
         type: 'REGISTER_USER_SUCCESS',
-        payload: { user, token, location },
-      });
-      addUserToLocalStorage({
-        user,
-        token,
-        location,
+        payload: { user, location },
       });
     } catch (error) {
       dispatch({
@@ -141,15 +126,10 @@ const AppProvider = ({ children }) => {
     dispatch({ type: 'LOGIN_USER_BEGIN' });
     try {
       const response = await axios.post('/api/v1/auth/loginUser', currentUser);
-      const { user, token, location } = response.data;
+      const { user, location } = response.data;
       dispatch({
         type: 'LOGIN_USER_SUCCESS',
-        payload: { user, token, location },
-      });
-      addUserToLocalStorage({
-        user,
-        token,
-        location,
+        payload: { user, location },
       });
     } catch (error) {
       dispatch({
@@ -170,10 +150,8 @@ const AppProvider = ({ children }) => {
 
       dispatch({
         type: 'UPDATE_USER_SUCCESS',
-        payload: { user, location, token },
+        payload: { user, location },
       });
-
-      addUserToLocalStorage({ user, location, token: initialState.token });
     } catch (error) {
       if (error.response.status !== 401) {
         dispatch({
@@ -185,9 +163,9 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
-  const logoutUser = () => {
+  const logoutUser = async () => {
+    await authFetch.get('/auth/logoutUser')
     dispatch({ type: 'LOGOUT_USER' });
-    removeUserFromLocalStorage();
   };
 
   const createJob = async () => {
@@ -326,6 +304,9 @@ const AppProvider = ({ children }) => {
     dispatch({ type: 'CHANGE_PAGE', payload: { page } });
   };
 
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
   return (
     <AppContext.Provider
       value={{

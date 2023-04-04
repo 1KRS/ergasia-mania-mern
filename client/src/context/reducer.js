@@ -28,6 +28,23 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === 'GET_CURRENT_USER_BEGIN') {
+    return {
+      ...state,
+      userLoading: true,
+      showAlert: false,
+    };
+  }
+  if (action.type === 'GET_CURRENT_USER_SUCCESS') {
+    return {
+      ...state,
+      user: action.payload.user,
+      userLocation: action.payload.location,
+      jobLocation: action.payload.location,
+      userLoading: false,
+    };
+  }
+
   if (action.type === 'REGISTER_USER_BEGIN') {
     return {
       ...state,
@@ -38,7 +55,6 @@ const reducer = (state, action) => {
     return {
       ...state,
       user: action.payload.user,
-      token: action.payload.token,
       userLocation: action.payload.location,
       jobLocation: action.payload.location,
       isLoading: false,
@@ -67,7 +83,6 @@ const reducer = (state, action) => {
     return {
       ...state,
       user: action.payload.user,
-      token: action.payload.token,
       userLocation: action.payload.location,
       jobLocation: action.payload.location,
       isLoading: false,
@@ -96,7 +111,6 @@ const reducer = (state, action) => {
     return {
       ...state,
       user: action.payload.user,
-      token: action.payload.token,
       userLocation: action.payload.location,
       jobLocation: action.payload.location,
       isLoading: false,
@@ -119,9 +133,7 @@ const reducer = (state, action) => {
     return {
       ...initialState,
       user: null,
-      token: null,
-      userLocation: '',
-      jobLocation: '',
+      userLoading: false,
     };
   }
 

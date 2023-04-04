@@ -1,10 +1,15 @@
 import main from '../assets/images/main-alternative.svg';
 import styled from 'styled-components';
 import { Logo } from '../components';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { useAppContext } from '../context/appContext';
+import React from 'react';
 
 const Landing = () => {
+  const {user} = useAppContext()
   return (
+    <React.Fragment>
+    {user && <Navigate to='/' />}
     <Wrapper>
       <nav>
         <Logo />
@@ -28,6 +33,7 @@ const Landing = () => {
         <img src={main} alt="Job hunt" className="img main-img" />
       </div>
     </Wrapper>
+    </React.Fragment>
   );
 };
 
