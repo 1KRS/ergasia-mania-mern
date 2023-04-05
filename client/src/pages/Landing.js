@@ -6,33 +6,50 @@ import { useAppContext } from '../context/appContext';
 import React from 'react';
 
 const Landing = () => {
-  const {user} = useAppContext()
+  const { user, isLoading, loginUser } = useAppContext();
   return (
     <React.Fragment>
-    {user && <Navigate to='/' />}
-    <Wrapper>
-      <nav>
-        <Logo />
-      </nav>
-      <div className="container page">
-        <div className="info">
-          {/* info */}
-          <h1>
-            Σημείο <span>Ιχνηλάτησης</span> Εργασίας
-          </h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
-            in, consectetur quibusdam non doloremque odit obcaecati tenetur
-            veniam debitis itaque nemo praesentium tempora asperiores, corporis
-            dolores eaque! Error, tempore debitis!
-          </p>
-          <Link to="/register" className="btn btn-hero">
-            Σύνδεση / Εγγραφή
-          </Link>
+      {user && <Navigate to="/" />}
+      <Wrapper>
+        <nav>
+          <Logo />
+        </nav>
+        <div className="container page">
+          <div className="info">
+            {/* info */}
+            <h1>
+              Σημείο <span>Ιχνηλάτησης</span> Εργασίας
+            </h1>
+            <p>
+              Καλώς ήλθατε στο σημείο ιχνηλάτησης της εργασίας σας, όπου
+              μπορείτε με μια ματιά να έχετε την εποπτεία όλων αιτημάτων σας για
+              εργασία, σημαντικές πληροφορίες για κάθε ξεχωριστό αίτημά σας
+              καθώς και μηνιαία στατιστικά του τελευταίου εξαμήνου.
+            </p>
+            <footer>
+              <div className="actions">
+                <Link to="/register" className="btn btn-hero">
+                  Σύνδεση / Εγγραφή
+                </Link>
+                <button
+                  type="button"
+                  className="btn btn-hipster"
+                  disabled={isLoading}
+                  onClick={() => {
+                    loginUser({
+                      email: 'test@test.gr',
+                      password: 'secret',
+                    });
+                  }}
+                >
+                  {isLoading ? 'Φόρτωση...' : 'Επίδειξη Εφαρμογής'}
+                </button>
+              </div>
+            </footer>
+          </div>
+          <img src={main} alt="Job hunt" className="img main-img" />
         </div>
-        <img src={main} alt="Job hunt" className="img main-img" />
-      </div>
-    </Wrapper>
+      </Wrapper>
     </React.Fragment>
   );
 };
@@ -61,6 +78,20 @@ const Wrapper = styled.main`
   }
   p {
     color: var(--grey-600);
+  }
+  footer {
+    border-radius: var(--borderRadius);
+    display: grid;
+    grid-template-rows: 1fr auto;
+  }
+  .btn-hero {
+    margin: 0 0.5rem 0 0;
+  }
+  .btn-hipster {
+    font-size: 1.25rem;
+    margin: 0 0 0 0.5rem;
+    padding: 0.5rem 1.25rem;
+    cursor: pointer;
   }
   .main-img {
     display: none;
