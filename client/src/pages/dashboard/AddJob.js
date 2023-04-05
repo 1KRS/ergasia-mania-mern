@@ -123,7 +123,6 @@ const Wrapper = styled.section`
   }
   .form {
     margin: 0;
-    border-radius: 0;
     box-shadow: none;
     padding: 0;
     max-width: 100%;

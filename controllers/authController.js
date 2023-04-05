@@ -15,7 +15,7 @@ const registerUser = async (req, res, next) => {
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) {
-    throw new BadRequestError('Συμπλήρωσε όλα τα πεδία. (1.Auth Controller)'); // Ελέγχουμε τα στοιχεία που δηλώθηκαν. Εάν κάποιο λείπει στέλνουμε λάθος.
+    throw new BadRequestError('Συμπλήρωσε όλα τα πεδία.'); // Ελέγχουμε τα στοιχεία που δηλώθηκαν. Εάν κάποιο λείπει στέλνουμε λάθος.
   }
   const user = await User.create({ name, email, password }); // Δημιουργούμε νέο χρήστη
   const token = user.createJWT(); // Δημιουργούμε νέο αποδεικτικό
@@ -34,7 +34,7 @@ const registerUser = async (req, res, next) => {
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    throw new BadRequestError('Συμπλήρωσε όλα τα πεδία. (2.Auth Controller)'); // Ελέγχουμε τα στοιχεία που δηλώθηκαν. Εάν κάποιο λείπει στέλνουμε λάθος.
+    throw new BadRequestError('Συμπλήρωσε όλα τα πεδία.'); // Ελέγχουμε τα στοιχεία που δηλώθηκαν. Εάν κάποιο λείπει στέλνουμε λάθος.
   }
 
   const user = await User.findOne({ email }).select('+password'); // Ψάχνουμε τον χρήστη. Έπειτα προσθέτουμε και τον κωδικό χρήστη για να τον συγκρίνουμε παρακάτω.

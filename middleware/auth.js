@@ -6,7 +6,7 @@ const auth = async (req, res, next) => {
 
   if (!token) {
     throw new UnauthenticatedError(
-      'Αποτυχία Αυθεντικοποίησης (1.Auth Middleware)'
+      'Αποτυχία Αυθεντικοποίησης'
     );
   }
   try {
@@ -16,7 +16,7 @@ const auth = async (req, res, next) => {
     next();
   } catch (error) {
     throw new UnauthenticatedError(
-      'Αποτυχία Αυθεντικοποίησης (2.Auth Middleware)'
+      'Αποτυχία Αυθεντικοποίησης'
     );
   }
 };

@@ -8,7 +8,7 @@ import checkPermissions from '../utils/checkPermissions.js';
 const createJob = async (req, res) => {
   const { position, company } = req.body;
   if (!position || !company) {
-    throw new BadRequestError('Συμπλήρωσε όλα τα πεδία! (1. JobController)');
+    throw new BadRequestError('Συμπλήρωσε όλα τα πεδία!');
   }
 
   req.body.createdBy = req.user.userId;
@@ -23,7 +23,7 @@ const updateJob = async (req, res) => {
   const { company, position } = req.body;
 
   if (!position || !company) {
-    throw new BadRequestError('Συμπλήρωσε όλα τα πεδία! (2. JobController)');
+    throw new BadRequestError('Συμπλήρωσε όλα τα πεδία!');
   }
 
   const job = await Job.findOne({ _id: jobId });

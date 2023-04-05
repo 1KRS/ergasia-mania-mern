@@ -23,10 +23,9 @@ const Profile = () => {
   return (
     <Wrapper>
       <form className="form" onSubmit={handleSubmit}>
-        <h3>profile </h3>
+        <h3>Σελίδα Χρήστη </h3>
         {showAlert && <Alert />}
 
-        {/* name */}
         <div className="form-center">
           <FormRow
             labelText="Όνομα"
@@ -49,7 +48,6 @@ const Profile = () => {
             value={email}
             handleChange={(e) => setEmail(e.target.value)}
           />
-
           <FormRow
             labelText="Τοποθεσία"
             type="text"
@@ -77,7 +75,6 @@ const Wrapper = styled.section`
   }
   .form {
     margin: 0;
-    border-radius: 0;
     box-shadow: none;
     padding: 0;
     max-width: 100%;

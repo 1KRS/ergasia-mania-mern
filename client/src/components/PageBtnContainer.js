@@ -60,7 +60,6 @@ const PageButtonContainer = () => {
 
 const Wrapper = styled.section`
   height: 6rem;
-  margin-top: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -36,16 +36,21 @@ const JobsContainer = () => {
 
   return (
     <Wrapper>
-      <h5>
+      <h4>
         {jobs.length > 1 ? 'Βρέθηκαν' : 'Βρέθηκε'} {totalJobs}{' '}
         {jobs.length > 1 ? 'εργασίες.' : 'εργασία.'}
-      </h5>
+      </h4>
+      <div className="paginator-top">
+        {numOfPages > 1 && <PageBtnContainer />}
+      </div>
       <div className="jobs">
         {jobs.map((job) => {
           return <Job key={job._id} {...job} />;
         })}
       </div>
-      {numOfPages > 1 && <PageBtnContainer />}
+      <div className="paginator-bottom">
+        {numOfPages > 1 && <PageBtnContainer />}
+      </div>
     </Wrapper>
   );
 };
@@ -56,15 +61,22 @@ const Wrapper = styled.section`
     text-transform: none;
     text-align: center;
   }
-  & > h5 {
+  & > h4 {
     text-transform: none;
     text-align: center;
     font-weight: 700;
+    margin-bottom: 0;
   }
   .jobs {
     display: grid;
     grid-template-columns: 1fr;
     row-gap: 2rem;
+  }
+  .paginator-top {
+      margin-bottom 0.7rem;
+  }
+  .paginator-bottom {
+      margin-top 1rem;
   }
   @media (min-width: 992px) {
     .jobs {

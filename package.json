@@ -1,5 +1,5 @@
 {
-  "name": "ergasia-mania-mern",
+  "name": "ergasiomania-mern",
   "version": "1.0.0",
   "description": "#### Track Your Job Search",
   "main": "server.js",
@@ -17,15 +17,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/1KRS/ergasia-mania-mern.git"
+    "url": "git+https://github.com/1KRS/ergasiomania-mern.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/1KRS/ergasia-mania-mern/issues"
+    "url": "https://github.com/1KRS/ergasiomania-mern/issues"
   },
-  "homepage": "https://github.com/1KRS/ergasia-mania-mern#readme",
+  "homepage": "https://github.com/1KRS/ergasiomania-mern#readme",
   "devDependencies": {
     "concurrently": "^7.6.0",
     "nodemon": "^2.0.21"

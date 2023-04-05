@@ -6,25 +6,25 @@ import { ImProfile } from 'react-icons/im';
 const links = [
   {
     id: 1,
-    text: 'stats',
+    text: 'στατιστικά',
     path: '/',
     icon: <IoBarChartSharp />,
   },
   {
     id: 2,
-    text: 'all jobs',
+    text: 'εργασίες',
     path: 'all-jobs',
     icon: <MdQueryStats />,
   },
   {
     id: 3,
-    text: 'add job',
+    text: 'προσθήκη',
     path: 'add-job',
     icon: <FaWpforms />,
   },
   {
     id: 4,
-    text: 'profile',
+    text: 'σελίδα χρήστη',
     path: 'profile',
     icon: <ImProfile />,
   },

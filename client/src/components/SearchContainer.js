@@ -1,13 +1,13 @@
-import { FormRow, FormRowSelect } from '.';
+import { Alert, FormRow, FormRowSelect } from '.';
 import { useAppContext } from '../context/appContext';
 import { useState, useMemo } from 'react';
 import styled from 'styled-components';
 
 const SearchContainer = () => {
+  const { showAlert } = useAppContext();
   const [localSearch, setLocalSearch] = useState('');
   const {
     isLoading,
-    // search,
     searchStatus,
     searchType,
     sort,
@@ -19,7 +19,6 @@ const SearchContainer = () => {
   } = useAppContext();
 
   const handleSearch = (e) => {
-    // if (isLoading) return;
     handleChange({ name: e.target.name, value: e.target.value });
   };
 
@@ -40,53 +39,50 @@ const SearchContainer = () => {
     };
   };
 
+  // eslint-disable-next-line
   const optimizedDebounce = useMemo(() => debounce(), []);
+
   return (
     <Wrapper>
       <form className="form">
-        <h4>search form</h4>
-        {/* search position */}
+        <h3>Φίλτρα Αναζήτησης</h3>
+        {showAlert && <Alert />}
+
         <div className="form-center">
-          <FormRow
+          <FormRow // Πεδίο Αναζήτησης
             labelText={'Αναζήτηση'}
             type="text"
             name="search"
             value={localSearch}
             handleChange={optimizedDebounce}
-          ></FormRow>
-          {/* search by status */}
-          <FormRowSelect
+          />
+          <FormRowSelect // Αναζήτηση μέσω κατάστασης
             labelText="Φάση Αίτησης"
             name="searchStatus"
             value={searchStatus}
             handleChange={handleSearch}
             list={['Όλα', ...statusOptions]}
-          ></FormRowSelect>
-          {/* search by type */}
-
-          <FormRowSelect
+          />
+          <FormRowSelect // Αναζήτηση μέσω τύπου
             labelText="Τύπος Εργασίας"
             name="searchType"
             value={searchType}
             handleChange={handleSearch}
             list={['Όλα', ...jobTypeOptions]}
-          ></FormRowSelect>
-          {/* sort */}
-
+          />
           <FormRowSelect
             labelText="Οργάνωση"
             name="sort"
             value={sort}
             handleChange={handleSearch}
             list={sortOptions}
-          ></FormRowSelect>
+          />
           <button
             className="btn btn-block btn-danger"
             disabled={isLoading}
             onClick={handleSubmit}
           >
             Καθαρισμός Φίλτρων
-            {/* Clear Filters*/}
           </button>
         </div>
       </form>
@@ -95,9 +91,18 @@ const SearchContainer = () => {
 };
 
 const Wrapper = styled.section`
+  border-radius: var(--borderRadius);
+  width: 100%;
+  background: var(--white);
+  padding: 3rem 2rem 4rem;
+  box-shadow: var(--shadow-2);
+
   .form {
-    width: 100%;
+    margin: 0;
+    box-shadow: none;
+    padding: 0;
     max-width: 100%;
+    width: 100%;
   }
   .form-input,
   .form-select,
