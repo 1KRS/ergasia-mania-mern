@@ -253,13 +253,15 @@ const reducer = (state, action) => {
   }
 
   if (action.type === 'CLEAR_VALUES') {
-    initialState.isEditing = false;
-    initialState.editJobId = '';
-    initialState.position = '';
-    initialState.company = '';
-    initialState.jobLocation = state.userLocation;
-    initialState.jobType = 'Πλήρης Απασχόληση';
-    initialState.status = 'Εκκρεμεί';
+    const initialState = {
+      isEditing: false,
+      editJobId: '',
+      position: '',
+      company: '',
+      jobLocation: state.userLocation,
+      jobType: 'Πλήρης Απασχόληση',
+      status: 'Εκκρεμεί',
+    };
     return {
       ...state,
       ...initialState,
