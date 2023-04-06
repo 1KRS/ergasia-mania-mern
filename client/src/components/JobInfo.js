@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import { useAppContext } from '../context/appContext';
 
 const JobInfo = ({ icon, text }) => {
   return (
-    <Wrapper className=''>
-      <span className='icon'>{icon}</span>
-      <span className='text'>{text}</span>
+    <Wrapper className="">
+      <span className="icon">{icon}</span>
+      <span className="text">{text}</span>
     </Wrapper>
   );
 };
@@ -27,6 +28,6 @@ const Wrapper = styled.div`
     text-transform: capitalize;
     letter-spacing: var(--letterSpacing);
   }
-`
+`;
 
 export default JobInfo;

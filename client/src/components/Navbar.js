@@ -1,13 +1,14 @@
 import styled from 'styled-components';
-import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
+import { FaAlignLeft, FaCaretDown } from 'react-icons/fa';
 import { useAppContext } from '../context/appContext';
 import Logo from './Logo';
 import { useState } from 'react';
+import { CircleFlag } from 'react-circle-flags';
 
 const Navbar = () => {
   const [showLogout, setShowLogout] = useState(false);
-  const { toggleSidebar, logoutUser, user } = useAppContext();
-
+  const { language, toggleSidebar, changeLanguage, logoutUser, user } =
+    useAppContext();
 
   return (
     <Wrapper>
@@ -17,23 +18,90 @@ const Navbar = () => {
         </button>
         <div>
           <Logo />
-          <h3 className="logo-text">dashboard</h3>
+          <h3 className="logo-text">
+            {language === 'english'
+              ? 'dashboard'
+              : language === 'svenska'
+              ? 'instrumentbräda'
+              : 'πίνακας'}
+          </h3>
         </div>
         <div className="btn-container">
-          <button
-            className="btn"
-            onClick={() => setShowLogout(!showLogout)}
-          >
-            <FaUserCircle />
+          <button className="btn" onClick={() => setShowLogout(!showLogout)}>
+            <CircleFlag
+              countryCode={
+                language === 'english'
+                  ? 'uk'
+                  : language === 'svenska'
+                  ? 'se'
+                  : 'gr'
+              }
+              className="flag"
+            />
             {user?.name}
             <FaCaretDown />
           </button>
-          <div className={showLogout ? 'dropdown show-dropdown' : 'dropdown'}>
+          <div
+            className={
+              showLogout
+                ? 'dropdown show-dropdown show-dropdown-firstLanguage'
+                : 'dropdown'
+            }
+          >
             <button
+              type="button"
+              onClick={() => {
+                const newLanguage =
+                  language === 'ελληνικά' ? 'english' : 'ελληνικά';
+                changeLanguage(newLanguage);
+              }}
               className="dropdown-btn"
-              onClick={logoutUser}
             >
-              Έξοδος
+              {language === 'ελληνικά' ? (
+                <CircleFlag countryCode="uk" className="flag-dropdown" />
+              ) : (
+                <CircleFlag countryCode="gr" className="flag-dropdown" />
+              )}
+              {language === 'ελληνικά' ? 'English' : 'Ελληνικά'}
+            </button>
+          </div>
+          <div
+            className={
+              showLogout
+                ? 'dropdown show-dropdown show-dropdown-secondLanguage'
+                : 'dropdown'
+            }
+          >
+            <button
+              type="button"
+              onClick={() => {
+                const newLanguage =
+                  language === 'svenska' ? 'english' : 'svenska';
+                changeLanguage(newLanguage);
+              }}
+              className="dropdown-btn"
+            >
+              {language === 'svenska' ? (
+                <CircleFlag countryCode="uk" className="flag-dropdown" />
+              ) : (
+                <CircleFlag countryCode="se" className="flag-dropdown" />
+              )}
+              {language === 'svenska' ? 'English' : 'Svenska'}
+            </button>
+          </div>
+          <div
+            className={
+              showLogout
+                ? 'dropdown show-dropdown show-dropdown-exit'
+                : 'dropdown'
+            }
+          >
+            <button className="dropdown-btn btn-exit" onClick={logoutUser}>
+              {language === 'english'
+                ? 'Logout'
+                : language === 'svenska'
+                ? 'Logga ut'
+                : 'Έξοδος'}
             </button>
           </div>
         </div>
@@ -59,6 +127,15 @@ const Wrapper = styled.nav`
     align-items: center;
     justify-content: space-between;
   }
+  .flag {
+    width: 25px;
+    height: 25px;
+  }
+  .flag-dropdown {
+    margin-right: 5px;
+    width: 13px;
+    height: 13px;
+  }
   .toggle-btn {
     background: transparent;
     border-color: transparent;
@@ -79,6 +156,7 @@ const Wrapper = styled.nav`
     gap: 0 0.5rem;
     position: relative;
     box-shadow: var(--shadow-2);
+    font-size: 20px;
   }
 
   .dropdown {
@@ -88,7 +166,6 @@ const Wrapper = styled.nav`
     width: 100%;
     background: var(--primary-100);
     box-shadow: var(--shadow-2);
-    padding: 0.5rem;
     text-align: center;
     visibility: hidden;
     border-radius: var(--borderRadius);
@@ -104,9 +181,22 @@ const Wrapper = styled.nav`
     text-transform: capitalize;
     cursor: pointer;
   }
+  .show-dropdown-firstLanguage {
+    margin-top: 0px;
+  }
+  .show-dropdown-secondLanguage {
+    margin-top: 30px;
+  }
+  .show-dropdown-exit {
+    margin-top: 60px;
+  }
   .logo-text {
     display: none;
     margin: 0;
+  }
+  .btn-exit {
+    padding: 0.3rem 0;
+    font-size: 20px;
   }
   @media (min-width: 992px) {
     position: sticky;

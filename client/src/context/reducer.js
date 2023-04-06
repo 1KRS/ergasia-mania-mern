@@ -28,6 +28,13 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === 'CHANGE_LANGUAGE') {
+    return {
+      ...state,
+      language: action.payload.newLanguage,
+    };
+  }
+
   if (action.type === 'GET_CURRENT_USER_BEGIN') {
     return {
       ...state,

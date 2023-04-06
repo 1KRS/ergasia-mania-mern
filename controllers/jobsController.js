@@ -153,7 +153,7 @@ const showStats = async (req, res) => {
       } = item;
 
       const date = DateTime.fromObject({ month: month, year: year })
-        .setLocale('el')
+        // .setLocale('el')
         .toFormat('MMM y');
 
       return { date, count };

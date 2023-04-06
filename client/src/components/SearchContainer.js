@@ -7,6 +7,7 @@ const SearchContainer = () => {
   const { showAlert } = useAppContext();
   const [localSearch, setLocalSearch] = useState('');
   const {
+    language,
     isLoading,
     searchStatus,
     searchType,
@@ -45,33 +46,63 @@ const SearchContainer = () => {
   return (
     <Wrapper>
       <form className="form">
-        <h3>Φίλτρα Αναζήτησης</h3>
+        <h3>
+          {language === 'english'
+            ? 'Search Filters'
+            : language === 'svenska'
+            ? 'Sökfilter'
+            : 'Φίλτρα Αναζήτησης'}
+        </h3>
         {showAlert && <Alert />}
 
         <div className="form-center">
           <FormRow // Πεδίο Αναζήτησης
-            labelText={'Αναζήτηση'}
+            labelText={
+              language === 'english'
+                ? 'Search'
+                : language === 'svenska'
+                ? 'Sök'
+                : 'Αναζήτηση'
+            }
             type="text"
             name="search"
             value={localSearch}
             handleChange={optimizedDebounce}
           />
           <FormRowSelect // Αναζήτηση μέσω κατάστασης
-            labelText="Φάση Αίτησης"
+            labelText={
+              language === 'english'
+                ? 'Status'
+                : language === 'svenska'
+                ? 'Status'
+                : 'Φάση Αίτησης'
+            }
             name="searchStatus"
             value={searchStatus}
             handleChange={handleSearch}
             list={['Όλα', ...statusOptions]}
           />
           <FormRowSelect // Αναζήτηση μέσω τύπου
-            labelText="Τύπος Εργασίας"
+            labelText={
+              language === 'english'
+                ? 'Work Type'
+                : language === 'svenska'
+                ? 'Arbetstyp'
+                : 'Τύπος Εργασίας'
+            }
             name="searchType"
             value={searchType}
             handleChange={handleSearch}
             list={['Όλα', ...jobTypeOptions]}
           />
           <FormRowSelect
-            labelText="Οργάνωση"
+            labelText={
+              language === 'english'
+                ? 'Sort'
+                : language === 'svenska'
+                ? 'Sortera'
+                : 'Οργάνωση'
+            }
             name="sort"
             value={sort}
             handleChange={handleSearch}
@@ -82,7 +113,11 @@ const SearchContainer = () => {
             disabled={isLoading}
             onClick={handleSubmit}
           >
-            Καθαρισμός Φίλτρων
+            {language === 'english'
+              ? 'Clear Filters'
+              : language === 'svenska'
+              ? 'Rensa Filter'
+              : 'Καθαρισμός Φίλτρων'}
           </button>
         </div>
       </form>

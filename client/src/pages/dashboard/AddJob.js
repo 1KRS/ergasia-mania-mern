@@ -4,6 +4,7 @@ import { useAppContext } from '../../context/appContext';
 
 const AddJob = () => {
   const {
+    language,
     isLoading,
     showAlert,
     displayAlert,
@@ -29,7 +30,7 @@ const AddJob = () => {
       return;
     }
     if (isEditing) {
-      editJob()
+      editJob();
       return;
     }
     createJob();
@@ -48,43 +49,73 @@ const AddJob = () => {
         {/* position */}
         <div className="form-center">
           <FormRow
+            labelText={
+              language === 'english'
+                ? 'Job Position'
+                : language === 'svenska'
+                ? 'Befattning'
+                : 'Θέση Εργασίας'
+            }
             type="text"
             name="position"
             value={position}
             handleChange={handleJobInput}
-            labelText="Θέση Εργασίας"
           />
           {/* company */}
           <FormRow
+            labelText={
+              language === 'english'
+                ? 'Company'
+                : language === 'svenska'
+                ? 'Företag'
+                : 'Εταιρεία'
+            }
             type="text"
             name="company"
             value={company}
             handleChange={handleJobInput}
-            labelText="Εταιρεία"
           />
           {/* location */}
           <FormRow
+            labelText={
+              language === 'english'
+                ? 'Location'
+                : language === 'svenska'
+                ? 'Spårande'
+                : 'Τοποθεσία'
+            }
             type="text"
             name="jobLocation"
             value={jobLocation}
             handleChange={handleJobInput}
-            labelText="Τοποθεσία"
           />
           {/* job type */}
           <FormRowSelect
+            labelText={
+              language === 'english'
+                ? 'Job Type'
+                : language === 'svenska'
+                ? 'Arbetstyp'
+                : 'Τύπος Εργασίας'
+            }
             name="jobType"
             value={jobType}
             handleChange={handleJobInput}
             list={jobTypeOptions}
-            labelText="Τύπος Εργασίας"
           />
           {/* job status */}
           <FormRowSelect
+            labelText={
+              language === 'english'
+                ? 'Status'
+                : language === 'svenska'
+                ? 'Status'
+                : 'Κατάσταση'
+            }
             name="status"
             value={status}
             handleChange={handleJobInput}
             list={statusOptions}
-            labelText="Κατάσταση"
           />
 
           <div className="btn-container">
@@ -94,7 +125,11 @@ const AddJob = () => {
               onClick={handleSubmit}
               disabled={isLoading}
             >
-              Αποθήκευση
+              {language === 'english'
+                ? 'Submit'
+                : language === 'svenska'
+                ? 'Skicka In'
+                : 'Αποθήκευση'}
             </button>
             <button
               className="btn btn-block clear-btn"
@@ -103,7 +138,12 @@ const AddJob = () => {
                 clearValues();
               }}
             >
-              Εκκαθάριση
+             {language === 'english'
+                ? 'Clear'
+                : language === 'svenska'
+                ? 'Klar'
+                : 'Εκκαθάριση'}
+              
             </button>
           </div>
         </div>

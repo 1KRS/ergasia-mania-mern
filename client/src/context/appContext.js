@@ -6,6 +6,7 @@ import axios from 'axios';
 
 export const initialState = {
   user: null,
+  language: 'ελληνικά',
   userLocation: '',
   userLoading: true,
   isLoading: false,
@@ -86,14 +87,21 @@ const AppProvider = ({ children }) => {
     dispatch({ type: 'TOGGLE_SIDEBAR' });
   };
 
+  const changeLanguage = (newLanguage) => {
+    dispatch({
+      type: 'CHANGE_LANGUAGE',
+      payload: { newLanguage },
+    });
+  };
+
   const getCurrentUser = async (user) => {
     dispatch({ type: 'GET_CURRENT_USER_BEGIN' });
     try {
       const { data } = await authFetch('/auth/getCurrentUser');
-      const { user, location } = data;
+      const { user, language, location } = data;
       dispatch({
         type: 'GET_CURRENT_USER_SUCCESS',
-        payload: { user, location },
+        payload: { user, language, location },
       });
     } catch (error) {
       if (error.response.status === 401) return;
@@ -164,7 +172,7 @@ const AppProvider = ({ children }) => {
   };
 
   const logoutUser = async () => {
-    await authFetch.get('/auth/logoutUser')
+    await authFetch.get('/auth/logoutUser');
     dispatch({ type: 'LOGOUT_USER' });
   };
 
@@ -314,6 +322,7 @@ const AppProvider = ({ children }) => {
         displayAlert,
         registerUser,
         toggleSidebar,
+        changeLanguage,
         loginUser,
         updateUser,
         logoutUser,

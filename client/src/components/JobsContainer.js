@@ -7,6 +7,7 @@ import PageBtnContainer from './PageBtnContainer';
 
 const JobsContainer = () => {
   const {
+    language,
     getJobs,
     jobs,
     isLoading,
@@ -18,6 +19,7 @@ const JobsContainer = () => {
     sort,
     numOfPages,
   } = useAppContext();
+  
   useEffect(() => {
     getJobs();
     // eslint-disable-next-line
@@ -29,11 +31,20 @@ const JobsContainer = () => {
   if (jobs.length === 0) {
     return (
       <Wrapper>
-        <h2>Δεν βρέθηκαν εργασίες...</h2>
+        <h2>
+          {language === 'english'
+            ? 'No jobs found...'
+            : language === 'svenska'
+            ? 'Inga jobb hittades...'
+            : 'Δεν βρέθηκαν εργασίες...'}
+        </h2>
       </Wrapper>
     );
   }
 
+  
+    /* <h4>{totalJobs} job{jobs.length > 1 && 's'} found */
+  
   return (
     <Wrapper>
       <h4>

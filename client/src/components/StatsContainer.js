@@ -4,31 +4,47 @@ import { FaSuitcaseRolling, FaCalendarCheck, FaTimes, FaCheck } from 'react-icon
 import styled from 'styled-components'
 
 const StatsContainer = () => {
-  const { stats } = useAppContext();
+  const { language, stats } = useAppContext();
   const defaultStats = [
     {
-      title: 'Εκκρεμούν',
+      title: language === 'english'
+      ? 'Pending'
+      : language === 'svenska'
+      ? 'I Väntan På'
+      : 'Εκκρεμούν',
       count: stats.Εκκρεμεί || 0,
       icon: <FaSuitcaseRolling />,
       color: '#e9b949',
       bgc: '#fcefc7',
     },
     {
-      title: 'Σε φάση συνέντευξης',
+      title: language === 'english'
+      ? 'Interview'
+      : language === 'svenska'
+      ? 'Intervju'
+      : 'Συνέντευξη',
       count: stats.Συνέντευξη || 0,
       icon: <FaCalendarCheck />,
       color: '#647acb',
       bgc: '#e0e8f9',
     },
     {
-      title: 'Απορρίφθηκαν',
+      title: language === 'english'
+      ? 'Rejected'
+      : language === 'svenska'
+      ? 'Avvisade'
+      : 'Απορρίφθηκαν',
       count: stats.Απορρίφθηκε || 0,
       icon: <FaTimes />,
       color: '#d66a6a',
       bgc: '#ffeeee',
     },
     {
-      title: 'Εγκρίθηκαν',
+      title: language === 'english'
+      ? 'Approved'
+      : language === 'svenska'
+      ? 'Godkänd'
+      : 'Εγκρίθηκαν',
       count: stats.Εγκρίθηκε || 0,
       icon: <FaCheck />,
       color: '#0f5132',

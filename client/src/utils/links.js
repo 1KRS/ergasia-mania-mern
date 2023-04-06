@@ -3,28 +3,37 @@ import { MdQueryStats } from 'react-icons/md';
 import { FaWpforms } from 'react-icons/fa';
 import { ImProfile } from 'react-icons/im';
 
+
 const links = [
   {
     id: 1,
-    text: 'στατιστικά',
+    textGr: 'στατιστικά',
+    textUk: 'statistics',
+    textSe: 'statistik',
     path: '/',
     icon: <IoBarChartSharp />,
   },
   {
     id: 2,
-    text: 'εργασίες',
+    textGr: 'εργασίες',
+    textUk: 'jobs',
+    textSe: 'jobb',
     path: 'all-jobs',
     icon: <MdQueryStats />,
   },
   {
     id: 3,
-    text: 'προσθήκη',
+    textGr: 'προσθήκη',
+    textUk: 'add job',
+    textSe: 'lägga till',
     path: 'add-job',
     icon: <FaWpforms />,
   },
   {
     id: 4,
-    text: 'σελίδα χρήστη',
+    textGr: 'σελίδα χρήστη',
+    textUk: 'profile',
+    textSe: 'profil',
     path: 'profile',
     icon: <ImProfile />,
   },

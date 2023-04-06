@@ -4,7 +4,7 @@ import { Alert, FormRow } from '../../components';
 import { useAppContext } from '../../context/appContext';
 
 const Profile = () => {
-  const { user, showAlert, displayAlert, updateUser, isLoading } =
+  const { user, language, showAlert, displayAlert, updateUser, isLoading } =
     useAppContext();
   const [name, setName] = useState(user?.name);
   const [email, setEmail] = useState(user?.email);
@@ -23,40 +23,80 @@ const Profile = () => {
   return (
     <Wrapper>
       <form className="form" onSubmit={handleSubmit}>
-        <h3>Σελίδα Χρήστη </h3>
+        <h3>
+          {language === 'english'
+            ? 'Profile'
+            : language === 'svenska'
+            ? 'Profil'
+            : 'Σελίδα Χρήστη'}
+        </h3>
         {showAlert && <Alert />}
 
         <div className="form-center">
           <FormRow
-            labelText="Όνομα"
+            labelText={
+              language === 'english'
+                ? 'Name'
+                : language === 'svenska'
+                ? 'Namn'
+                : 'Όνομα'
+            }
             type="text"
             name="name"
             value={name}
             handleChange={(e) => setName(e.target.value)}
           />
           <FormRow
-            labelText="Επώνυμο"
+            labelText={
+              language === 'english'
+                ? 'Surname'
+                : language === 'svenska'
+                ? 'Efternamn'
+                : 'Επώνυμο'
+            }
             type="text"
             name="lastName"
             value={lastName}
             handleChange={(e) => setLastName(e.target.value)}
           />
           <FormRow
-            labelText="Ηλ. Ταχυδρομείο"
+            labelText={
+              language === 'english'
+                ? 'eMail'
+                : language === 'svenska'
+                ? 'ePost'
+                : 'ηΤαχυδρομείο'
+            }
             type="email"
             name="email"
             value={email}
             handleChange={(e) => setEmail(e.target.value)}
           />
           <FormRow
-            labelText="Τοποθεσία"
+            labelText={
+              language === 'english'
+                ? 'Location'
+                : language === 'svenska'
+                ? 'Spårande'
+                : 'Τοποθεσία'
+            }
             type="text"
             name="location"
             value={location}
             handleChange={(e) => setLocation(e.target.value)}
           />
           <button className="btn btn-block" type="submit" disabled={isLoading}>
-            {isLoading ? 'Παρακαλώ Περιμένετε...' : 'Αποθήκευση Αλλαγών'}
+            {isLoading
+              ? language === 'english'
+                ? 'Please Wait...'
+                : language === 'svenska'
+                ? 'Vänta Snäll...'
+                : 'Παρακαλώ Περιμένετε...'
+              : language === 'english'
+              ? 'Save Changes'
+              : language === 'svenska'
+              ? 'Spara Ändringar'
+              : 'Αποθήκευση Αλλαγών'}
           </button>
         </div>
       </form>

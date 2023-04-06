@@ -9,12 +9,13 @@ const initialState = {
   email: '',
   password: '',
   isMember: true,
+  language: 'ελληνικά'
 };
 
 const Register = () => {
   const navigate = useNavigate();
   const [values, setValues] = useState(initialState);
-  const { user, isLoading, showAlert, displayAlert, registerUser, loginUser } =
+  const { user, language, isLoading, showAlert, displayAlert, registerUser, loginUser } =
     useAppContext();
 
   const toggleMember = () => {
@@ -56,30 +57,40 @@ const Register = () => {
     <Wrapper className="full-page">
       <form className="form" onSubmit={onSubmit}>
         <Logo />
-        <h3>{values.isMember ? 'Είσοδος' : 'Εγγραφή'}</h3>
+        <h3>{values.isMember ? 
+              language === 'english'
+                ? 'Login'
+                : language === 'svenska'
+                ? 'Logga In'
+                : 'Είσοδος'
+             : language === 'english'
+                ? 'Register'
+                : language === 'svenska'
+                ? 'Registrera'
+                : 'Εγγραφή'}</h3>
         {showAlert && <Alert />}
         {!values.isMember && (
           <FormRow
+            labelText="Όνομα"
             type="text"
             name="name"
             value={values.name}
             handleChange={handleChange}
-            labelText="Όνομα"
           />
         )}
         <FormRow
+          labelText="Ηλ. Ταχυδρομείο"
           type="email"
           name="email"
           value={values.email}
           handleChange={handleChange}
-          labelText="Ηλ. Ταχυδρομείο"
         />
         <FormRow
+          labelText="Κωδικός"
           type="password"
           name="password"
           value={values.password}
           handleChange={handleChange}
-          labelText="Κωδικός"
         />
         <button type="submit" className="btn btn-block" disabled={isLoading}>
           {values.isMember ? 'Σύνδεση' : 'Εγγραφή'}

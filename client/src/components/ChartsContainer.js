@@ -6,18 +6,47 @@ import styled from 'styled-components';
 
 function ChartsContainer() {
   const [barChart, setBarChart] = useState(true);
-  const { monthlyApplications: data } = useAppContext();
+  const { language, monthlyApplications: data } = useAppContext();
 
   return (
     <Wrapper>
-      <h4>Μηνιαία Δεδομένα</h4>
+      <h4>
+        {' '}
+        {language === 'english'
+          ? 'Montly Data'
+          : language === 'svenska'
+          ? 'Månadsdata'
+          : 'Μηνιαία Δεδομένα'}
+      </h4>
 
-      {barChart ? <h5>Ραβδόγραμμα</h5> : <h5>Γράφημα Περιοχής</h5>}
+      {barChart ? (
+        <h5>
+          {language === 'english'
+            ? 'Bar Chart'
+            : language === 'svenska'
+            ? 'Stapeldiagram'
+            : 'Ραβδόγραμμα'}
+        </h5>
+      ) : (
+        <h5>
+          {' '}
+          {language === 'english'
+            ? 'Area Chart'
+            : language === 'svenska'
+            ? 'Områdesdiagram'
+            : 'Γράφημα Περιοχής'}
+        </h5>
+      )}
 
       {barChart ? <BarChart data={data} /> : <AreaChart data={data} />}
 
       <button type="button" onClick={() => setBarChart(!barChart)}>
-        Αλλαγή Γραφήματος
+      {language === 'english'
+          ? 'Change Chart'
+          : language === 'svenska'
+          ? 'Ändra Diagram'
+          : 'Αλλαγή Γραφήματος'}
+        
       </button>
     </Wrapper>
   );

@@ -14,7 +14,7 @@ const Job = ({
   createdAt,
   status,
 }) => {
-  const { setEditJobId, deleteJob } = useAppContext();
+  const { language, setEditJobId, deleteJob } = useAppContext();
   let date = DateTime.fromISO(createdAt).toFormat('DD');
 
   return (
@@ -29,9 +29,9 @@ const Job = ({
       <div className="content">
         <div className="content-center">
           <JobInfo icon={<FaLocationArrow />} text={jobLocation} />
-          <JobInfo icon={<FaCalendarAlt />}  text={date} />
+          <JobInfo icon={<FaCalendarAlt />} text={date} />
           <JobInfo icon={<FaBriefcase />} text={jobType} />
-          <div className={`status ${status}`} >{status}</div>
+          <div className={`status ${status}`}>{status}</div>
         </div>
         <footer>
           <div className="actions">
@@ -40,14 +40,22 @@ const Job = ({
               onClick={() => setEditJobId(_id)}
               className="btn edit-btn"
             >
-              Αλλαγή
+              {language === 'english'
+                ? 'Edit'
+                : language === 'svenska'
+                ? 'Redigera'
+                : 'Αλλαγή'}
             </Link>
             <button
               type="button"
               className="btn delete-btn"
               onClick={() => deleteJob(_id)}
             >
-              Διαγραφή
+              {language === 'english'
+                ? 'Delete'
+                : language === 'svenska'
+                ? 'Radera'
+                : 'Διαγραφή'}
             </button>
           </div>
         </footer>
@@ -97,19 +105,23 @@ const Wrapper = styled.article`
       letter-spacing: var(--letterSpacing);
     }
   }
-  .pending, .Εκκρεμεί {
+  .pending,
+  .Εκκρεμεί {
     background: #fcefc7;
     color: #e9b949;
   }
-  .interview, .Συνέντευξη{
+  .interview,
+  .Συνέντευξη {
     background: #e0e8f9;
     color: #647acb;
   }
-  .declined, .Απορρίφθηκε{
+  .declined,
+  .Απορρίφθηκε {
     color: #d66a6a;
     background: #ffeeee;
   }
-  .approved, .Εγκρίθηκε{
+  .approved,
+  .Εγκρίθηκε {
     color: #0f5132;
     background: #d1e7dd;
   }
