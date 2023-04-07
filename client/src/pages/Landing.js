@@ -1,6 +1,6 @@
 import main from '../assets/images/main-alternative.svg';
 import styled from 'styled-components';
-import { Logo } from '../components';
+import logo from '../assets/images/EM.ελ.svg';
 import { Link, Navigate } from 'react-router-dom';
 import { useAppContext } from '../context/appContext';
 import React from 'react';
@@ -12,7 +12,9 @@ const Landing = () => {
       {user && <Navigate to="/" />}
       <Wrapper>
         <nav>
-          <Logo />
+          <div>
+            <img src={logo} alt="ErgasioMania" className="logo" />
+          </div>
         </nav>
         <div className="container page">
           <div className="info">
@@ -58,10 +60,14 @@ const Wrapper = styled.main`
   nav {
     width: var(--fluid-width);
     max-width: var(--max-width);
-    margin: 0 auto;
+    margin: 7rem auto 0;
     height: var(--nav-height);
     display: flex;
     align-items: center;
+    justify-content: center;
+  }
+  .logo{
+    max-height: 15rem;
   }
   .page {
     min-height: calc(100vh - var(--nav-height));
