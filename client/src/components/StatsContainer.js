@@ -5,6 +5,7 @@ import styled from 'styled-components'
 
 const StatsContainer = () => {
   const { language, stats } = useAppContext();
+
   const defaultStats = [
     {
       title: language === 'english'
@@ -51,6 +52,8 @@ const StatsContainer = () => {
       bgc: '#d1e7dd',
     },
   ];
+
+
 
   return (
     <Wrapper>

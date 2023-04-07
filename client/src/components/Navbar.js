@@ -192,7 +192,7 @@ const Wrapper = styled.nav`
   }
   .logo-text {
     display: none;
-    margin: 0;
+    margin: 0 0 0 135px;
   }
   .btn-exit {
     padding: 0.3rem 0;
