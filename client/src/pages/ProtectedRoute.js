@@ -7,11 +7,11 @@ const ProtectedRoute = ({ children }) => {
   if (userLoading) return <Loading />;
   if (!user) {
     return language === 'english' ? (
-      <Navigate to="/landingUk" />
+      <Navigate to="/uk/landing" />
     ) : language === 'swedish' ? (
-      <Navigate to="/landingSe" />
+      <Navigate to="/se/landing" />
     ) : (
-      <Navigate to="/landingEl" />
+      <Navigate to="/el/landing" />
     );
   }
   return children;
