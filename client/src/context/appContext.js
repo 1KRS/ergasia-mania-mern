@@ -6,7 +6,7 @@ import axios from 'axios';
 
 export const initialState = {
   user: null,
-  language: 'ελληνικά',
+  language: localStorage.getItem('language') || 'ελληνικά',
   userLocation: '',
   userLoading: true,
   isLoading: false,
@@ -19,7 +19,7 @@ export const initialState = {
   position: '',
   company: '',
   jobTypeOptions: [
-    'Σύμβουλος',
+    'Σύμβουλευτική',
     'Συνεργασία',
     'Πλήρης Απασχόληση',
     'Ημιαπασχόληση',
@@ -88,6 +88,7 @@ const AppProvider = ({ children }) => {
   };
 
   const changeLanguage = (newLanguage) => {
+    localStorage.setItem('language', newLanguage);
     dispatch({
       type: 'CHANGE_LANGUAGE',
       payload: { newLanguage },

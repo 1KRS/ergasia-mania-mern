@@ -43,7 +43,19 @@ const AddJob = () => {
   return (
     <Wrapper>
       <form className="form">
-        <h3>{isEditing ? 'Αλλαγή Εργασίας' : 'Προσθήκη Εργασίας'} </h3>
+        <h3>
+          {isEditing
+            ? language === 'english'
+              ? 'Edit Job'
+              : language === 'svenska'
+              ? 'Redigera Jobb'
+              : 'Επεξεργασία Εργασίας'
+            : language === 'english'
+            ? 'Add Job'
+            : language === 'svenska'
+            ? 'Lägg Τill Jobb'
+            : 'Προσθήκη Εργασίας'}{' '}
+        </h3>
         {showAlert && <Alert />}
 
         {/* position */}
@@ -138,12 +150,11 @@ const AddJob = () => {
                 clearValues();
               }}
             >
-             {language === 'english'
+              {language === 'english'
                 ? 'Clear'
                 : language === 'svenska'
                 ? 'Klar'
                 : 'Εκκαθάριση'}
-              
             </button>
           </div>
         </div>

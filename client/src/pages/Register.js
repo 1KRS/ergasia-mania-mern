@@ -9,14 +9,21 @@ const initialState = {
   email: '',
   password: '',
   isMember: true,
-  language: 'ελληνικά'
+  language: 'ελληνικά',
 };
 
 const Register = () => {
   const navigate = useNavigate();
   const [values, setValues] = useState(initialState);
-  const { user, language, isLoading, showAlert, displayAlert, registerUser, loginUser } =
-    useAppContext();
+  const {
+    user,
+    language,
+    isLoading,
+    showAlert,
+    displayAlert,
+    registerUser,
+    loginUser,
+  } = useAppContext();
 
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
@@ -57,21 +64,29 @@ const Register = () => {
     <Wrapper className="full-page">
       <form className="form" onSubmit={onSubmit}>
         <Logo />
-        <h3>{values.isMember ? 
-              language === 'english'
-                ? 'Login'
-                : language === 'svenska'
-                ? 'Logga In'
-                : 'Είσοδος'
-             : language === 'english'
-                ? 'Register'
-                : language === 'svenska'
-                ? 'Registrera'
-                : 'Εγγραφή'}</h3>
+        <h3>
+          {values.isMember
+            ? language === 'english'
+              ? 'Login'
+              : language === 'svenska'
+              ? 'Logga In'
+              : 'Είσοδος'
+            : language === 'english'
+            ? 'Register'
+            : language === 'svenska'
+            ? 'Registrera'
+            : 'Εγγραφή'}
+        </h3>
         {showAlert && <Alert />}
         {!values.isMember && (
           <FormRow
-            labelText="Όνομα"
+            labelText={
+              language === 'english'
+                ? 'Name'
+                : language === 'svenska'
+                ? 'Namn'
+                : 'Όνομα'
+            }
             type="text"
             name="name"
             value={values.name}
@@ -79,21 +94,43 @@ const Register = () => {
           />
         )}
         <FormRow
-          labelText="Ηλ. Ταχυδρομείο"
+          labelText={
+            language === 'english'
+              ? 'e-Mail'
+              : language === 'svenska'
+              ? 'e-Post'
+              : 'Ηλ. Ταχυδρομείο'
+          }
           type="email"
           name="email"
           value={values.email}
           handleChange={handleChange}
         />
         <FormRow
-          labelText="Κωδικός"
+          labelText={
+            language === 'english'
+              ? 'Password'
+              : language === 'svenska'
+              ? 'Lösenord'
+              : 'Κωδικός'
+          }
           type="password"
           name="password"
           value={values.password}
           handleChange={handleChange}
         />
         <button type="submit" className="btn btn-block" disabled={isLoading}>
-          {values.isMember ? 'Σύνδεση' : 'Εγγραφή'}
+          {values.isMember
+            ? language === 'english'
+              ? 'Login'
+              : language === 'svenska'
+              ? 'Logga In'
+              : 'Σύνδεση'
+            : language === 'english'
+            ? 'Register'
+            : language === 'svenska'
+            ? 'Registrera'
+            : 'Εγγραφή'}
         </button>
         <button
           type="button"
@@ -106,12 +143,39 @@ const Register = () => {
             });
           }}
         >
-          {isLoading ? 'Φόρτωση...' : 'Επίδειξη Εφαρμογής'}
+          {isLoading ? language === 'english'
+              ? 'Loading...'
+              : language === 'svenska'
+              ? 'Laddning...'
+              : 'Φόρτωση...'
+            : language === 'english'
+            ? 'Demo App'
+            : language === 'svenska'
+            ? 'Demo App'
+            : 'Επίδειξη Εφαρμογής'}
         </button>
         <p>
-          {values.isMember ? 'Δεν είσαι μέλος; ' : 'Είσαι ήδη μέλος; '}
+          {values.isMember ? language === 'english'
+              ? 'Not a member?'
+              : language === 'svenska'
+              ? 'Inte en medlem?'
+              : 'Δεν είσαι μέλος; '
+            : language === 'english'
+            ? 'Already a member?'
+            : language === 'svenska'
+            ? 'Redan medlem?'
+            : 'Είσαι ήδη μέλος; '}
           <button type="button" onClick={toggleMember} className="member-btn">
-            {values.isMember ? 'Εγγράψου.' : 'Συνδέσου.'}
+            {values.isMember ? language === 'english'
+              ? 'Register.'
+              : language === 'svenska'
+              ? 'Registrera.'
+              : 'Εγγράψου.'
+            : language === 'english'
+            ? 'Login.'
+            : language === 'svenska'
+            ? 'Logga In.'
+            : 'Συνδέσου.'}
           </button>
         </p>
       </form>
