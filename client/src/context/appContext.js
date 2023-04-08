@@ -40,8 +40,8 @@ export const initialState = {
   search: '',
   searchStatus: 'Όλα',
   searchType: 'Όλα',
-  sort: 'Νεότερες',
   sortOptions: ['Νεότερες', 'Παλαιότερες', 'Α -> Ω', 'Ω -> Α'],
+  sort: 'Νεότερες',
 };
 
 const AppContext = React.createContext();

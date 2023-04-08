@@ -4,6 +4,7 @@ import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../context/appContext';
 import JobInfo from './JobInfo';
+import { translateText } from '../utils/translateText';
 
 const Job = ({
   _id,
@@ -40,22 +41,14 @@ const Job = ({
               onClick={() => setEditJobId(_id)}
               className="btn edit-btn"
             >
-              {language === 'english'
-                ? 'Edit'
-                : language === 'svenska'
-                ? 'Redigera'
-                : 'Αλλαγή'}
+              {translateText('Αλλαγή', language)}
             </Link>
             <button
               type="button"
               className="btn delete-btn"
               onClick={() => deleteJob(_id)}
             >
-              {language === 'english'
-                ? 'Delete'
-                : language === 'svenska'
-                ? 'Radera'
-                : 'Διαγραφή'}
+              {translateText('Διαγραφή', language)}
             </button>
           </div>
         </footer>

@@ -2,11 +2,12 @@ import { Alert, FormRow, FormRowSelect } from '.';
 import { useAppContext } from '../context/appContext';
 import { useState, useMemo } from 'react';
 import styled from 'styled-components';
+import { translateText } from '../utils/translateText';
 
 const SearchContainer = () => {
-  const { showAlert } = useAppContext();
   const [localSearch, setLocalSearch] = useState('');
   const {
+    showAlert,
     language,
     isLoading,
     searchStatus,
@@ -46,63 +47,33 @@ const SearchContainer = () => {
   return (
     <Wrapper>
       <form className="form">
-        <h3>
-          {language === 'english'
-            ? 'Search Filters'
-            : language === 'svenska'
-            ? 'Sökfilter'
-            : 'Φίλτρα Αναζήτησης'}
-        </h3>
+        <h3>{translateText('Φίλτρα Αναζήτησης', language)}</h3>
         {showAlert && <Alert />}
 
         <div className="form-center">
           <FormRow // Πεδίο Αναζήτησης
-            labelText={
-              language === 'english'
-                ? 'Search'
-                : language === 'svenska'
-                ? 'Sök'
-                : 'Αναζήτηση'
-            }
+            labelText={translateText('Αναζήτηση', language)}
             type="text"
             name="search"
             value={localSearch}
             handleChange={optimizedDebounce}
           />
           <FormRowSelect // Αναζήτηση μέσω κατάστασης
-            labelText={
-              language === 'english'
-                ? 'Status'
-                : language === 'svenska'
-                ? 'Status'
-                : 'Φάση Αίτησης'
-            }
+            labelText={translateText('Κατάσταση Αίτησης', language)}
             name="searchStatus"
             value={searchStatus}
             handleChange={handleSearch}
             list={['Όλα', ...statusOptions]}
           />
           <FormRowSelect // Αναζήτηση μέσω τύπου
-            labelText={
-              language === 'english'
-                ? 'Work Type'
-                : language === 'svenska'
-                ? 'Arbetstyp'
-                : 'Τύπος Εργασίας'
-            }
+            labelText={translateText('Τύπος Εργασίας', language)}
             name="searchType"
             value={searchType}
             handleChange={handleSearch}
             list={['Όλα', ...jobTypeOptions]}
           />
           <FormRowSelect
-            labelText={
-              language === 'english'
-                ? 'Sort'
-                : language === 'svenska'
-                ? 'Sortera'
-                : 'Οργάνωση'
-            }
+            labelText={translateText('Οργάνωση', language)}
             name="sort"
             value={sort}
             handleChange={handleSearch}
@@ -113,11 +84,7 @@ const SearchContainer = () => {
             disabled={isLoading}
             onClick={handleSubmit}
           >
-            {language === 'english'
-              ? 'Clear Filters'
-              : language === 'svenska'
-              ? 'Rensa Filter'
-              : 'Καθαρισμός Φίλτρων'}
+            {translateText('Καθαρισμός Φίλτρων', language)}
           </button>
         </div>
       </form>

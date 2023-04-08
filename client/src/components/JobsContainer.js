@@ -4,6 +4,7 @@ import Loading from './Loading';
 import Job from './Job';
 import styled from 'styled-components';
 import PageBtnContainer from './PageBtnContainer';
+import { translateText } from '../utils/translateText';
 
 const JobsContainer = () => {
   const {
@@ -19,7 +20,7 @@ const JobsContainer = () => {
     sort,
     numOfPages,
   } = useAppContext();
-  
+
   useEffect(() => {
     getJobs();
     // eslint-disable-next-line
@@ -31,26 +32,25 @@ const JobsContainer = () => {
   if (jobs.length === 0) {
     return (
       <Wrapper>
-        <h2>
-          {language === 'english'
-            ? 'No jobs found...'
-            : language === 'svenska'
-            ? 'Inga jobb hittades...'
-            : 'Δεν βρέθηκαν εργασίες...'}
-        </h2>
+        <h2>{translateText('Δεν βρέθηκαν εργασίες...', language)}</h2>
       </Wrapper>
     );
   }
 
-  
-    /* <h4>{totalJobs} job{jobs.length > 1 && 's'} found */
-  
   return (
     <Wrapper>
-      <h4>
-        {jobs.length > 1 ? 'Βρέθηκαν' : 'Βρέθηκε'} {totalJobs}{' '}
-        {jobs.length > 1 ? 'εργασίες.' : 'εργασία.'}
-      </h4>
+      {language === 'english' ? (
+        <h4>
+          {totalJobs} job{jobs.length > 1 && 's'} found.
+        </h4>
+      ) : language === 'svenska' ? (
+        <h4>{totalJobs} jobb hittade.</h4>
+      ) : (
+        <h4>
+          {jobs.length > 1 ? 'Βρέθηκαν' : 'Βρέθηκε'} {totalJobs}{' '}
+          {jobs.length > 1 ? 'εργασίες.' : 'εργασία.'}
+        </h4>
+      )}
       <div className="paginator-top">
         {numOfPages > 1 && <PageBtnContainer />}
       </div>
@@ -84,10 +84,10 @@ const Wrapper = styled.section`
     row-gap: 2rem;
   }
   .paginator-top {
-      margin-bottom 0.7rem;
+      margin-bottom: 0.7rem;
   }
   .paginator-bottom {
-      margin-top 1rem;
+      margin-top: 1rem;
   }
   @media (min-width: 992px) {
     .jobs {

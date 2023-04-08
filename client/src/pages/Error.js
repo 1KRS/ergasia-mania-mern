@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import img from '../assets/images/not-found.svg';
 import styled from 'styled-components';
 import { useAppContext } from '../context/appContext';
+import { translateText } from '../utils/translateText';
 
 const Error = () => {
   const { language } = useAppContext();
@@ -10,27 +11,14 @@ const Error = () => {
     <Wrapper className="full-page">
       <div>
         <img src={img} alt="not found" />
-        <h3>{
-              language === 'english'
-                ? 'OOPS! SOMETHING WENT WRONG.'
-                : language === 'svenska'
-                ? 'HOPPSAN! NÅGOT GICK FEL.'
-                : 'ΩΠ! ΚΑΤΙ ΠΗΓΕ ΛΑΘΟΣ.'
-            }</h3>
-        <p>{
-              language === 'english'
-                ? 'It looks like we are not able to find the page you are looking for.'
-                : language === 'svenska'
-                ? 'Det verkar som att vi inte kan hitta sidan du letar efter.'
-                : 'Φαίνεται ότι δεν μπορούμε να ξετρυπώσουμε την σελίδα που ψάχνεις.'
-            }</p>
-        <Link to="/">{
-              language === 'english'
-                ? 'RETURN'
-                : language === 'svenska'
-                ? 'LÄMNA TILLBAKA'
-                : 'ΕΠΙΣΤΡΟΦΗ'
-            }</Link>
+        <h3>{translateText('ΩΠ! ΚΑΤΙ ΠΗΓΕ ΛΑΘΟΣ.', language)}</h3>
+        <p>
+          {translateText(
+            'Φαίνεται ότι δεν μπορούμε να ξετρυπώσουμε την σελίδα που ψάχνεις.',
+            language
+          )}
+        </p>
+        <Link to="/">{translateText('ΕΠΙΣΤΡΟΦΗ', language)}</Link>
       </div>
     </Wrapper>
   );

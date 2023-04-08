@@ -1,7 +1,5 @@
 import { useAppContext } from '../context/appContext';
-import { greekTerms, englishTerms, swedishTerms } from '../utils/translationTerms';
-
-
+import { translateText } from '../utils/translateText';
 
 const FormRowSelect = ({ labelText, name, value, handleChange, list }) => {
   const { language } = useAppContext();
@@ -19,16 +17,9 @@ const FormRowSelect = ({ labelText, name, value, handleChange, list }) => {
         className="form-select"
       >
         {list.map((itemValue, index) => {
-          const termIndex = greekTerms.findIndex((e) => e === itemValue);
-          const termInLanguage =
-            language === 'english'
-              ? englishTerms[termIndex]
-              : language === 'svenska'
-              ? swedishTerms[termIndex]
-              : itemValue;
           return (
             <option key={index} value={itemValue}>
-              {termInLanguage}
+              {translateText(itemValue, language)}
             </option>
           );
         })}

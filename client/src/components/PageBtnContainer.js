@@ -1,6 +1,7 @@
 import { useAppContext } from '../context/appContext';
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
 import styled from 'styled-components';
+import { translateText } from '../utils/translateText';
 
 const PageButtonContainer = () => {
   const { language, numOfPages, page, changePage } = useAppContext();
@@ -32,11 +33,7 @@ const PageButtonContainer = () => {
     <Wrapper>
       <button className="prev-btn" onClick={prevPage}>
         <HiChevronDoubleLeft />
-        {language === 'english'
-          ? 'Previous'
-          : language === 'svenska'
-          ? 'Tidigare'
-          : 'Προηγούμενη'}
+        {translateText('Προηγούμενη', language)}
       </button>
 
       <div className="btn-container">
@@ -55,11 +52,7 @@ const PageButtonContainer = () => {
       </div>
 
       <button className="next-btn" onClick={nextPage}>
-        {language === 'english'
-          ? 'Next'
-          : language === 'svenska'
-          ? 'Νästa'
-          : 'Επόμενη'}
+        {translateText('Επόμενη', language)}
         <HiChevronDoubleRight />
       </button>
     </Wrapper>

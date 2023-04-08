@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { Alert, FormRow } from '../../components';
 import { useAppContext } from '../../context/appContext';
+import { translateText } from '../../utils/translateText';
 
 const Profile = () => {
   const { user, language, showAlert, displayAlert, updateUser, isLoading } =
@@ -23,63 +24,33 @@ const Profile = () => {
   return (
     <Wrapper>
       <form className="form" onSubmit={handleSubmit}>
-        <h3>
-          {language === 'english'
-            ? 'Profile'
-            : language === 'svenska'
-            ? 'Profil'
-            : 'Σελίδα Χρήστη'}
-        </h3>
+        <h3>{translateText('Σελίδα Χρήστη', language)}</h3>
         {showAlert && <Alert />}
 
         <div className="form-center">
           <FormRow
-            labelText={
-              language === 'english'
-                ? 'Name'
-                : language === 'svenska'
-                ? 'Namn'
-                : 'Όνομα'
-            }
+            labelText={translateText('Όνομα', language)}
             type="text"
             name="name"
             value={name}
             handleChange={(e) => setName(e.target.value)}
           />
           <FormRow
-            labelText={
-              language === 'english'
-                ? 'Surname'
-                : language === 'svenska'
-                ? 'Efternamn'
-                : 'Επώνυμο'
-            }
+            labelText={translateText('Επώνυμο', language)}
             type="text"
             name="lastName"
             value={lastName}
             handleChange={(e) => setLastName(e.target.value)}
           />
           <FormRow
-            labelText={
-              language === 'english'
-                ? 'eMail'
-                : language === 'svenska'
-                ? 'ePost'
-                : 'ηΤαχυδρομείο'
-            }
+            labelText={translateText('ηΤαχυδρομείο', language)}
             type="email"
             name="email"
             value={email}
             handleChange={(e) => setEmail(e.target.value)}
           />
           <FormRow
-            labelText={
-              language === 'english'
-                ? 'Location'
-                : language === 'svenska'
-                ? 'Spårande'
-                : 'Τοποθεσία'
-            }
+            labelText={translateText('Τοποθεσία', language)}
             type="text"
             name="location"
             value={location}
@@ -87,16 +58,8 @@ const Profile = () => {
           />
           <button className="btn btn-block" type="submit" disabled={isLoading}>
             {isLoading
-              ? language === 'english'
-                ? 'Please Wait...'
-                : language === 'svenska'
-                ? 'Vänta Snäll...'
-                : 'Παρακαλώ Περιμένετε...'
-              : language === 'english'
-              ? 'Save Changes'
-              : language === 'svenska'
-              ? 'Spara Ändringar'
-              : 'Αποθήκευση Αλλαγών'}
+              ? translateText('Παρακαλώ Περιμένετε...', language)
+              : translateText('Αποθήκευση Αλλαγών', language)}
           </button>
         </div>
       </form>

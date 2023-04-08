@@ -4,6 +4,7 @@ import { useAppContext } from '../context/appContext';
 import Logo from './Logo';
 import { useState } from 'react';
 import { CircleFlag } from 'react-circle-flags';
+import { translateText } from '../utils/translateText';
 
 const Navbar = () => {
   const [showLogout, setShowLogout] = useState(false);
@@ -18,24 +19,12 @@ const Navbar = () => {
         </button>
         <div>
           <Logo />
-          <h3 className="logo-text">
-            {language === 'english'
-              ? 'dashboard'
-              : language === 'svenska'
-              ? 'instrumentbräda'
-              : 'πίνακας'}
-          </h3>
+          <h3 className="logo-text">{translateText('Πίνακας', language)}</h3>
         </div>
         <div className="btn-container">
           <button className="btn" onClick={() => setShowLogout(!showLogout)}>
             <CircleFlag
-              countryCode={
-                language === 'english'
-                  ? 'uk'
-                  : language === 'svenska'
-                  ? 'se'
-                  : 'gr'
-              }
+              countryCode={translateText('gr', language)}
               className="flag"
             />
             {user?.name}
@@ -97,11 +86,7 @@ const Navbar = () => {
             }
           >
             <button className="dropdown-btn btn-exit" onClick={logoutUser}>
-              {language === 'english'
-                ? 'Logout'
-                : language === 'svenska'
-                ? 'Logga ut'
-                : 'Έξοδος'}
+              {translateText('Έξοδος', language)}
             </button>
           </div>
         </div>

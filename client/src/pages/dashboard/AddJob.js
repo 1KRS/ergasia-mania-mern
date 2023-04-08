@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { FormRow, FormRowSelect, Alert } from '../../components';
 import { useAppContext } from '../../context/appContext';
+import { translateText } from '../../utils/translateText';
 
 const AddJob = () => {
   const {
@@ -45,29 +46,15 @@ const AddJob = () => {
       <form className="form">
         <h3>
           {isEditing
-            ? language === 'english'
-              ? 'Edit Job'
-              : language === 'svenska'
-              ? 'Redigera Jobb'
-              : 'Επεξεργασία Εργασίας'
-            : language === 'english'
-            ? 'Add Job'
-            : language === 'svenska'
-            ? 'Lägg Τill Jobb'
-            : 'Προσθήκη Εργασίας'}{' '}
+            ? translateText('Επεξεργασία Εργασίας', language)
+            : translateText('Προσθήκη Εργασίας', language)}{' '}
         </h3>
         {showAlert && <Alert />}
 
         {/* position */}
         <div className="form-center">
           <FormRow
-            labelText={
-              language === 'english'
-                ? 'Job Position'
-                : language === 'svenska'
-                ? 'Befattning'
-                : 'Θέση Εργασίας'
-            }
+            labelText={translateText('Θέση Εργασίας', language)}
             type="text"
             name="position"
             value={position}
@@ -75,13 +62,7 @@ const AddJob = () => {
           />
           {/* company */}
           <FormRow
-            labelText={
-              language === 'english'
-                ? 'Company'
-                : language === 'svenska'
-                ? 'Företag'
-                : 'Εταιρεία'
-            }
+            labelText={translateText('Εταιρεία', language)}
             type="text"
             name="company"
             value={company}
@@ -89,13 +70,7 @@ const AddJob = () => {
           />
           {/* location */}
           <FormRow
-            labelText={
-              language === 'english'
-                ? 'Location'
-                : language === 'svenska'
-                ? 'Spårande'
-                : 'Τοποθεσία'
-            }
+            labelText={translateText('Τοποθεσία', language)}
             type="text"
             name="jobLocation"
             value={jobLocation}
@@ -103,13 +78,7 @@ const AddJob = () => {
           />
           {/* job type */}
           <FormRowSelect
-            labelText={
-              language === 'english'
-                ? 'Job Type'
-                : language === 'svenska'
-                ? 'Arbetstyp'
-                : 'Τύπος Εργασίας'
-            }
+            labelText={translateText('Τύπος Εργασίας', language)}
             name="jobType"
             value={jobType}
             handleChange={handleJobInput}
@@ -117,13 +86,7 @@ const AddJob = () => {
           />
           {/* job status */}
           <FormRowSelect
-            labelText={
-              language === 'english'
-                ? 'Status'
-                : language === 'svenska'
-                ? 'Status'
-                : 'Κατάσταση'
-            }
+            labelText={translateText('Κατάσταση Αίτησης', language)}
             name="status"
             value={status}
             handleChange={handleJobInput}
@@ -137,11 +100,7 @@ const AddJob = () => {
               onClick={handleSubmit}
               disabled={isLoading}
             >
-              {language === 'english'
-                ? 'Submit'
-                : language === 'svenska'
-                ? 'Skicka In'
-                : 'Αποθήκευση'}
+              {translateText('Αποθήκευση', language)}
             </button>
             <button
               className="btn btn-block clear-btn"
@@ -150,11 +109,7 @@ const AddJob = () => {
                 clearValues();
               }}
             >
-              {language === 'english'
-                ? 'Clear'
-                : language === 'svenska'
-                ? 'Klar'
-                : 'Εκκαθάριση'}
+              {translateText('Εκκαθάριση', language)}
             </button>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { useAppContext } from '../context/appContext';
+import { translateText } from '../utils/translateText';
 import StatItem from './StatItem';
 import { FaSuitcaseRolling, FaCalendarCheck, FaTimes, FaCheck } from 'react-icons/fa';
 import styled from 'styled-components'
@@ -8,44 +9,29 @@ const StatsContainer = () => {
 
   const defaultStats = [
     {
-      title: language === 'english'
-      ? 'Pending'
-      : language === 'svenska'
-      ? 'I Väntan På'
-      : 'Εκκρεμούν',
+      title: translateText('Εκκρεμούν', language),
       count: stats.Εκκρεμεί || 0,
       icon: <FaSuitcaseRolling />,
       color: '#e9b949',
       bgc: '#fcefc7',
     },
     {
-      title: language === 'english'
-      ? 'Interview'
-      : language === 'svenska'
-      ? 'Intervju'
-      : 'Συνέντευξη',
+      title: 
+      translateText('Συνέντευξη', language),
       count: stats.Συνέντευξη || 0,
       icon: <FaCalendarCheck />,
       color: '#647acb',
       bgc: '#e0e8f9',
     },
     {
-      title: language === 'english'
-      ? 'Rejected'
-      : language === 'svenska'
-      ? 'Avvisade'
-      : 'Απορρίφθηκαν',
+      title: translateText('Απορρίφθηκαν', language),
       count: stats.Απορρίφθηκε || 0,
       icon: <FaTimes />,
       color: '#d66a6a',
       bgc: '#ffeeee',
     },
     {
-      title: language === 'english'
-      ? 'Approved'
-      : language === 'svenska'
-      ? 'Godkänd'
-      : 'Εγκρίθηκαν',
+      title: translateText('Εγκρίθηκαν', language),
       count: stats.Εγκρίθηκε || 0,
       icon: <FaCheck />,
       color: '#0f5132',

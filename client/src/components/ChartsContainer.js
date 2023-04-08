@@ -3,6 +3,7 @@ import BarChart from './BarChartComponent';
 import AreaChart from './AreaChartComponent';
 import { useAppContext } from '../context/appContext';
 import styled from 'styled-components';
+import { translateText } from '../utils/translateText.js';
 
 function ChartsContainer() {
   const [barChart, setBarChart] = useState(true);
@@ -10,43 +11,18 @@ function ChartsContainer() {
 
   return (
     <Wrapper>
-      <h4>
-        {' '}
-        {language === 'english'
-          ? 'Montly Data'
-          : language === 'svenska'
-          ? 'Månadsdata'
-          : 'Μηνιαία Δεδομένα'}
-      </h4>
+      <h4>{translateText('Μηνιαία Δεδομένα', language)}</h4>
 
       {barChart ? (
-        <h5>
-          {language === 'english'
-            ? 'Bar Chart'
-            : language === 'svenska'
-            ? 'Stapeldiagram'
-            : 'Ραβδόγραμμα'}
-        </h5>
+        <h5>{translateText('Ραβδόγραμμα', language)}</h5>
       ) : (
-        <h5>
-          {' '}
-          {language === 'english'
-            ? 'Area Chart'
-            : language === 'svenska'
-            ? 'Områdesdiagram'
-            : 'Γράφημα Περιοχής'}
-        </h5>
+        <h5>{translateText('Γράφημα Περιοχής', language)}</h5>
       )}
 
       {barChart ? <BarChart data={data} /> : <AreaChart data={data} />}
 
       <button type="button" onClick={() => setBarChart(!barChart)}>
-      {language === 'english'
-          ? 'Change Chart'
-          : language === 'svenska'
-          ? 'Ändra Diagram'
-          : 'Αλλαγή Γραφήματος'}
-        
+        {translateText('Αλλαγή Γραφήματος', language)}
       </button>
     </Wrapper>
   );

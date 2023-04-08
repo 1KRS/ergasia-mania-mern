@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 import { useAppContext } from '../context/appContext';
+import { translateText } from '../utils/translateText';
 
 const JobInfo = ({ icon, text }) => {
+  const { language } = useAppContext();
+
   return (
     <Wrapper className="">
       <span className="icon">{icon}</span>
-      <span className="text">{text}</span>
+      <span className="text">{translateText(text, language)}</span>
     </Wrapper>
   );
 };
