@@ -12,6 +12,8 @@ import SearchContainer from './SearchContainer';
 import StatsContainer from './StatsContainer';
 import ChartsContainer from './ChartsContainer';
 import Loading from './Loading';
+import LanguagesContainer from './LanguagesContainer';
+
 
 export {
   Logo,
@@ -27,5 +29,6 @@ export {
   SearchContainer,
   StatsContainer,
   ChartsContainer,
+  LanguagesContainer,
   Loading,
 };

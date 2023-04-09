@@ -3,6 +3,7 @@ import { Logo, FormRow, Alert } from '../components';
 import styled from 'styled-components';
 import { useAppContext } from '../context/appContext';
 import { useNavigate } from 'react-router-dom';
+import { translateText } from '../utils/translateText';
 
 const initialState = {
   name: '',
@@ -66,27 +67,13 @@ const Register = () => {
         <Logo />
         <h3>
           {values.isMember
-            ? language === 'english'
-              ? 'Login'
-              : language === 'svenska'
-              ? 'Logga In'
-              : 'Είσοδος'
-            : language === 'english'
-            ? 'Register'
-            : language === 'svenska'
-            ? 'Registrera'
-            : 'Εγγραφή'}
+            ? translateText('Είσοδος', language)
+            : translateText('Εγγραφή', language)}
         </h3>
         {showAlert && <Alert />}
         {!values.isMember && (
           <FormRow
-            labelText={
-              language === 'english'
-                ? 'Name'
-                : language === 'svenska'
-                ? 'Namn'
-                : 'Όνομα'
-            }
+            labelText={translateText('Όνομα', language)}
             type="text"
             name="name"
             value={values.name}
@@ -94,26 +81,14 @@ const Register = () => {
           />
         )}
         <FormRow
-          labelText={
-            language === 'english'
-              ? 'e-Mail'
-              : language === 'svenska'
-              ? 'e-Post'
-              : 'Ηλ. Ταχυδρομείο'
-          }
+          labelText={translateText('Ηλ. Ταχυδρομείο', language)}
           type="email"
           name="email"
           value={values.email}
           handleChange={handleChange}
         />
         <FormRow
-          labelText={
-            language === 'english'
-              ? 'Password'
-              : language === 'svenska'
-              ? 'Lösenord'
-              : 'Κωδικός'
-          }
+          labelText={translateText('Κωδικός', language)}
           type="password"
           name="password"
           value={values.password}
@@ -121,16 +96,8 @@ const Register = () => {
         />
         <button type="submit" className="btn btn-block" disabled={isLoading}>
           {values.isMember
-            ? language === 'english'
-              ? 'Login'
-              : language === 'svenska'
-              ? 'Logga In'
-              : 'Σύνδεση'
-            : language === 'english'
-            ? 'Register'
-            : language === 'svenska'
-            ? 'Registrera'
-            : 'Εγγραφή'}
+            ? translateText('Είσοδος', language)
+            : translateText('Εγγραφή', language)}
         </button>
         <button
           type="button"
@@ -143,39 +110,18 @@ const Register = () => {
             });
           }}
         >
-          {isLoading ? language === 'english'
-              ? 'Loading...'
-              : language === 'svenska'
-              ? 'Laddning...'
-              : 'Φόρτωση...'
-            : language === 'english'
-            ? 'Demo App'
-            : language === 'svenska'
-            ? 'Demo App'
-            : 'Επίδειξη Εφαρμογής'}
+          {isLoading
+            ? translateText('Φόρτωση...', language)
+            : translateText('Επίδειξη Εφαρμογής', language)}
         </button>
         <p>
-          {values.isMember ? language === 'english'
-              ? 'Not a member?'
-              : language === 'svenska'
-              ? 'Inte en medlem?'
-              : 'Δεν είσαι μέλος; '
-            : language === 'english'
-            ? 'Already a member?'
-            : language === 'svenska'
-            ? 'Redan medlem?'
-            : 'Είσαι ήδη μέλος; '}
+          {values.isMember
+            ? translateText('Δεν είσαι μέλος; ', language)
+            : translateText('Είσαι ήδη μέλος; ', language)}
           <button type="button" onClick={toggleMember} className="member-btn">
-            {values.isMember ? language === 'english'
-              ? 'Register.'
-              : language === 'svenska'
-              ? 'Registrera.'
-              : 'Εγγράψου.'
-            : language === 'english'
-            ? 'Login.'
-            : language === 'svenska'
-            ? 'Logga In.'
-            : 'Συνδέσου.'}
+            {values.isMember
+              ? translateText('Εγγράψου.', language)
+              : translateText('Συνδέσου.', language)}
           </button>
         </p>
       </form>

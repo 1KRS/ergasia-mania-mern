@@ -53,6 +53,17 @@ export const greekTerms = [
   'ΩΠ! ΚΑΤΙ ΠΗΓΕ ΛΑΘΟΣ.',
   'Φαίνεται ότι δεν μπορούμε να ξετρυπώσουμε την σελίδα που ψάχνεις.',
   'ΕΠΙΣΤΡΟΦΗ',
+  'Είσοδος',
+  'Σύνδεση',
+  'Εγγραφή',
+  'Ηλ. Ταχυδρομείο',
+  'Κωδικός',
+  'Φόρτωση...',
+  'Επίδειξη Εφαρμογής',
+  'Δεν είσαι μέλος; ',
+  'Είσαι ήδη μέλος; ',
+  'Εγγράψου.',
+  'Συνδέσου.',
 ];
 
 export const englishTerms = [
@@ -110,6 +121,17 @@ export const englishTerms = [
   'OOPS! SOMETHING WENT WRONG.',
   'It looks like we are not able to find the page you are looking for.',
   'RETURN',
+  'Login',
+  'Login',
+  'Register',
+  'E-Mail',
+  'Password',
+  'Loading...',
+  'Application Demo',
+  'Not a member? ',
+  'Already a member? ',
+  'Register.',
+  'Login.',
 ];
 
 export const swedishTerms = [
@@ -167,4 +189,15 @@ export const swedishTerms = [
   'HOPPSAN! NÅGOT GICK FEL.',
   'Det verkar som att vi inte kan hitta sidan du letar efter.',
   'LÄMNA TILLBAKA',
+  'Logga In',
+  'Logga In',
+  'Registrera',
+  'E-Post',
+  'Lösenord',
+  'Laddning...',
+  'Applikationsdemo',
+  'Inte en medlem? ',
+  'Redan medlem? ',
+  'Registrera',
+  'Logga In',
 ];
