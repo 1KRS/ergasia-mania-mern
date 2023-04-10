@@ -29,6 +29,7 @@ export const SmallSidebar = () => {
 };
 
 const Wrapper = styled.aside`
+ 
   @media (min-width: 992px) {
     display: none;
   }
@@ -74,6 +75,7 @@ const Wrapper = styled.aside`
     flex-direction: column;
   }
   .nav-link {
+    font-size: 1.5rem;
     display: flex;
     align-items: center;
     color: var(--grey-500);
@@ -88,7 +90,7 @@ const Wrapper = styled.aside`
     color: var(--primary-500);
   }
   .icon {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     margin-right: 1rem;
     display: grid;
     place-items: center;

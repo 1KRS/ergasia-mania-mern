@@ -66,6 +66,7 @@ export const greekTerms = [
   'Εγγράψου.',
   'Συνδέσου.',
   'Αιτήσεις',
+  'Χρήστης', 
 ];
 
 export const englishTerms = [
@@ -136,6 +137,7 @@ export const englishTerms = [
   'Register.',
   'Login.',
   'Applications',
+  'User', 
 ];
 
 export const swedishTerms = [
@@ -206,4 +208,5 @@ export const swedishTerms = [
   'Registrera',
   'Logga In',
   'Applikationer',
+  'Användare', 
 ];

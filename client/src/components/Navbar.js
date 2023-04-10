@@ -27,7 +27,7 @@ const Navbar = () => {
               countryCode={translateText('gr', language)}
               className="flag"
             />
-            {user?.name}
+            {user ? user.name === 'Χρήστης'? translateText('Χρήστης', language) : user.name : '-'}
             <FaCaretDown />
           </button>
           <div
