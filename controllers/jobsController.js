@@ -115,7 +115,6 @@ const showStats = async (req, res) => {
   ]);
 
   stats = stats.reduce((acc, curr) => {
-    console.log(curr);
     const { _id: title, Αιτήσεις } = curr;
     acc[title] = Αιτήσεις;
     return acc;

@@ -288,7 +288,6 @@ const AppProvider = ({ children }) => {
         const countNumber = e.count
         delete e.count;
         reformDate(e, translateText('Αιτήσεις', language), countNumber);
-        console.log('data', data.monthlyApplications);
         return e;
       });
       dispatch({
