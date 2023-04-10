@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   ResponsiveContainer,
   AreaChart,
@@ -7,8 +8,12 @@ import {
   CartesianGrid,
   Tooltip,
 } from 'recharts';
+import { translateText } from '../utils/translateText';
+import { useAppContext } from '../context/appContext';
 
 const AreaChartComponent = ({ data }) => {
+  const { language } = useAppContext();
+
   return (
     <ResponsiveContainer width="100%" height={300}>
       <AreaChart
@@ -21,7 +26,7 @@ const AreaChartComponent = ({ data }) => {
         <XAxis dataKey="date" />
         <YAxis allowDecimals={false} />
         <Tooltip />
-        <Area type="monotone" dataKey="count" stroke="#2cb1bc" fill="#bef8fd" />
+        <Area type="monotone" dataKey={translateText('Αιτήσεις', language)} stroke="#2cb1bc" fill="#bef8fd" />
       </AreaChart>
     </ResponsiveContainer>
   );

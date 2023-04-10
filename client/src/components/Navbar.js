@@ -104,7 +104,8 @@ const Wrapper = styled.nav`
   .logo {
     display: flex;
     align-items: center;
-    width: 100px;
+    margin-left: 130px;
+    width: 50px;
   }
   .nav-center {
     display: flex;

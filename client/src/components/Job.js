@@ -16,7 +16,9 @@ const Job = ({
   status,
 }) => {
   const { language, setEditJobId, deleteJob } = useAppContext();
-  let date = DateTime.fromISO(createdAt).toFormat('DD');
+  let date = DateTime.fromISO(createdAt)
+    .setLocale(translateText('el', language))
+    .toFormat('DD');
 
   return (
     <Wrapper>
@@ -31,8 +33,13 @@ const Job = ({
         <div className="content-center">
           <JobInfo icon={<FaLocationArrow />} text={jobLocation} />
           <JobInfo icon={<FaCalendarAlt />} text={date} />
-          <JobInfo icon={<FaBriefcase />} text={jobType} />
-          <div className={`status ${status}`}>{status}</div>
+          <JobInfo
+            icon={<FaBriefcase />}
+            text={translateText(jobType, language)}
+          />
+          <div className={`status ${status}`}>
+            {translateText(status, language)}
+          </div>
         </div>
         <footer>
           <div className="actions">

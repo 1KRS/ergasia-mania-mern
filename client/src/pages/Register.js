@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Logo, FormRow, Alert } from '../components';
+import { Logo, FormRow, Alert, LanguagesContainer } from '../components';
 import styled from 'styled-components';
 import { useAppContext } from '../context/appContext';
 import { useNavigate } from 'react-router-dom';
@@ -124,6 +124,7 @@ const Register = () => {
               : translateText('Συνδέσου.', language)}
           </button>
         </p>
+        <LanguagesContainer />
       </form>
     </Wrapper>
   );

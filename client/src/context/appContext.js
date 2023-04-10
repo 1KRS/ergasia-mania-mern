@@ -3,6 +3,9 @@
 import React, { useReducer, useContext, useEffect } from 'react';
 import reducer from './reducer';
 import axios from 'axios';
+import { DateTime } from 'luxon';
+import { reformDate } from '../utils/reformDate';
+import { translateText } from '../utils/translateText';
 
 export const initialState = {
   user: null,
@@ -19,7 +22,7 @@ export const initialState = {
   position: '',
   company: '',
   jobTypeOptions: [
-    'Σύμβουλευτική',
+    'Συμβουλευτική',
     'Συνεργασία',
     'Πλήρης Απασχόληση',
     'Ημιαπασχόληση',
@@ -273,15 +276,26 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
-  const showStats = async () => {
+  const showStats = async (language) => {
     dispatch({ type: 'SHOW_STATS_BEGIN' });
     try {
       const { data } = await authFetch('/jobs/stats');
+      const monthlyApplications = data.monthlyApplications.map((e) => {
+        const reformedDate = DateTime.fromISO(e.date)
+        .setLocale(translateText('el', language))
+        .toFormat('LLL dd');
+        reformDate(e, 'date', reformedDate);
+        const countNumber = e.count
+        delete e.count;
+        reformDate(e, translateText('Αιτήσεις', language), countNumber);
+        console.log('data', data.monthlyApplications);
+        return e;
+      });
       dispatch({
         type: 'SHOW_STATS_SUCCESS',
         payload: {
           stats: data.defaultStats,
-          monthlyApplications: data.monthlyApplications,
+          monthlyApplications: monthlyApplications,
         },
       });
     } catch (error) {
@@ -315,6 +329,7 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     getCurrentUser();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <AppContext.Provider

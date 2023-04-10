@@ -8,7 +8,7 @@ export const greekTerms = [
   'Συνέντευξη',
   'Απορρίφθηκε',
   'Εγκρίθηκε',
-  'Σύμβουλευτική',
+  'Συμβουλευτική',
   'Συνεργασία',
   'Πλήρης Απασχόληση',
   'Ημιαπασχόληση',
@@ -24,6 +24,7 @@ export const greekTerms = [
   'Δεν βρέθηκαν εργασίες...',
   'Πίνακας',
   'gr',
+  'el',
   'Έξοδος',
   'Προηγούμενη',
   'Επόμενη',
@@ -64,6 +65,7 @@ export const greekTerms = [
   'Είσαι ήδη μέλος; ',
   'Εγγράψου.',
   'Συνδέσου.',
+  'Αιτήσεις',
 ];
 
 export const englishTerms = [
@@ -92,6 +94,7 @@ export const englishTerms = [
   'No jobs found...',
   'Dashboard',
   'uk',
+  'en',
   'Logout',
   'Previous ',
   'Next',
@@ -132,6 +135,7 @@ export const englishTerms = [
   'Already a member? ',
   'Register.',
   'Login.',
+  'Applications',
 ];
 
 export const swedishTerms = [
@@ -160,6 +164,7 @@ export const swedishTerms = [
   'Inga jobb hittades...',
   'Instrumentbräda',
   'se',
+  'swe',
   'Logga ut',
   'Tidigare',
   'Νästa',
@@ -200,4 +205,5 @@ export const swedishTerms = [
   'Redan medlem? ',
   'Registrera',
   'Logga In',
+  'Applikationer',
 ];

@@ -111,12 +111,13 @@ const getAllJobs = async (req, res) => {
 const showStats = async (req, res) => {
   let stats = await Job.aggregate([
     { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
-    { $group: { _id: '$status', count: { $sum: 1 } } },
+    { $group: { _id: '$status', Αιτήσεις: { $sum: 1 } } },
   ]);
 
   stats = stats.reduce((acc, curr) => {
-    const { _id: title, count } = curr;
-    acc[title] = count;
+    console.log(curr);
+    const { _id: title, Αιτήσεις } = curr;
+    acc[title] = Αιτήσεις;
     return acc;
   }, {});
 
@@ -153,8 +154,7 @@ const showStats = async (req, res) => {
       } = item;
 
       const date = DateTime.fromObject({ month: month, year: year })
-        // .setLocale('el')
-        .toFormat('MMM y');
+        
 
       return { date, count };
     })
