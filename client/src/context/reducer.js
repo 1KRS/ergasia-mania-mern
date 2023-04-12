@@ -1,6 +1,6 @@
 // Ο reducer αναλαμβάνει την αποθήκευση της εκάστοτε κατάστασης (state)
 // μέσα σε ολόκληρη την εφαρμογή ανάλογα με την ενέργεια που περνάμε.
-
+import { translateText } from '../utils/translateText';
 import { initialState } from './appContext';
 
 const reducer = (state, action) => {
@@ -9,7 +9,10 @@ const reducer = (state, action) => {
       ...state,
       showAlert: true,
       alertType: 'danger',
-      alertText: 'Συμπλήρωσε όλα τα πεδία! (Reducer)',
+      alertText: translateText(
+        'Συμπλήρωσε όλα τα πεδία!',
+        `${action.payload.language}`
+      ),
     };
   }
   if (action.type === 'CLEAR_ALERT') {
@@ -59,6 +62,7 @@ const reducer = (state, action) => {
     };
   }
   if (action.type === 'REGISTER_USER_SUCCESS') {
+    console.log(action.payload.language)
     return {
       ...state,
       user: action.payload.user,
@@ -67,7 +71,10 @@ const reducer = (state, action) => {
       isLoading: false,
       showAlert: true,
       alertType: 'success',
-      alertText: 'Ο Χρήστης Δημιουργήθηκε! Ανακατεύθυνση...',
+      alertText: translateText(
+        'Ο Χρήστης Δημιουργήθηκε! Ανακατεύθυνση...',
+        `${action.payload.language}`
+      ),
     };
   }
   if (action.type === 'REGISTER_USER_ERROR') {
@@ -95,7 +102,10 @@ const reducer = (state, action) => {
       isLoading: false,
       showAlert: true,
       alertType: 'success',
-      alertText: 'Επιτυχής Είσοδος! Ανακατεύθυνση...',
+      alertText: translateText(
+        'Επιτυχής Είσοδος! Ανακατεύθυνση...',
+        `${action.payload.language}`
+      ),
     };
   }
   if (action.type === 'LOGIN_USER_ERROR') {
@@ -123,7 +133,10 @@ const reducer = (state, action) => {
       isLoading: false,
       showAlert: true,
       alertType: 'success',
-      alertText: 'Τα Στοιχεία Χρήστη Ενημερώθηκαν!',
+      alertText: translateText(
+        'Τα Στοιχεία Χρήστη Ενημερώθηκαν!',
+        `${action.payload.language}`
+      ),
     };
   }
   if (action.type === 'UPDATE_USER_ERROR') {
@@ -156,7 +169,10 @@ const reducer = (state, action) => {
       isLoading: false,
       showAlert: true,
       alertType: 'success',
-      alertText: 'Η Εργασία Προστέθηκε!',
+      alertText: translateText(
+        'Η Εργασία Προστέθηκε!',
+        `${action.payload.language}`
+      ),
     };
   }
   if (action.type === 'CREATE_JOB_ERROR') {
@@ -192,7 +208,10 @@ const reducer = (state, action) => {
       isLoading: false,
       showAlert: true,
       alertType: 'success',
-      alertText: 'Η Εργασία Ενημερώθηκε!',
+      alertText: translateText(
+        'Η Εργασία Ενημερώθηκε!',
+        `${action.payload.language}`
+      ),
     };
   }
   if (action.type === 'EDIT_JOB_ERROR') {

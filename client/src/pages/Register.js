@@ -39,7 +39,7 @@ const Register = () => {
     const { name, email, password, isMember } = values;
 
     if (!email || !password || (!isMember && !name)) {
-      displayAlert();
+      displayAlert(language);
       return;
     }
 
@@ -47,9 +47,9 @@ const Register = () => {
     const currentUserForLogin = { email, password };
 
     if (isMember) {
-      loginUser(currentUserForLogin);
+      loginUser(currentUserForLogin, language);
     } else {
-      registerUser(currentUserForRegister);
+      registerUser(currentUserForRegister, language);
     }
   };
 
@@ -107,7 +107,7 @@ const Register = () => {
             loginUser({
               email: 'test@test.gr',
               password: 'secret',
-            });
+            }, language);
           }}
         >
           {isLoading

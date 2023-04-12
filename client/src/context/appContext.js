@@ -75,8 +75,8 @@ const AppProvider = ({ children }) => {
   );
 
   // Λειτουργίες
-  const displayAlert = () => {
-    dispatch({ type: 'DISPLAY_ALERT' });
+  const displayAlert = (language) => {
+    dispatch({ type: 'DISPLAY_ALERT', payload: { language } });
     clearAlert();
   };
 
@@ -113,7 +113,7 @@ const AppProvider = ({ children }) => {
     }
   };
 
-  const registerUser = async (currentUser) => {
+  const registerUser = async (currentUser, language) => {
     dispatch({ type: 'REGISTER_USER_BEGIN' });
     try {
       const response = await axios.post(
@@ -123,36 +123,36 @@ const AppProvider = ({ children }) => {
       const { user, location } = response.data;
       dispatch({
         type: 'REGISTER_USER_SUCCESS',
-        payload: { user, location },
+        payload: { user, location, language },
       });
     } catch (error) {
       dispatch({
         type: 'REGISTER_USER_ERROR',
-        payload: { msg: error.response.data },
+        payload: { msg: translateText(error.response.data, language) },
       });
     }
     clearAlert();
   };
 
-  const loginUser = async (currentUser) => {
+  const loginUser = async (currentUser, language) => {
     dispatch({ type: 'LOGIN_USER_BEGIN' });
     try {
       const response = await axios.post('/api/v1/auth/loginUser', currentUser);
       const { user, location } = response.data;
       dispatch({
         type: 'LOGIN_USER_SUCCESS',
-        payload: { user, location },
+        payload: { user, location, language },
       });
     } catch (error) {
       dispatch({
         type: 'LOGIN_USER_ERROR',
-        payload: { msg: error.response.data },
+        payload: { msg: translateText(error.response.data, language) },
       });
     }
     clearAlert();
   };
 
-  const updateUser = async (currentUser) => {
+  const updateUser = async (currentUser, language) => {
     dispatch({ type: 'UPDATE_USER_BEGIN' });
     try {
       const { data } = await authFetch.patch('/auth/updateUser', currentUser);
@@ -162,13 +162,13 @@ const AppProvider = ({ children }) => {
 
       dispatch({
         type: 'UPDATE_USER_SUCCESS',
-        payload: { user, location },
+        payload: { user, location, language },
       });
     } catch (error) {
       if (error.response.status !== 401) {
         dispatch({
           type: 'UPDATE_USER_ERROR',
-          payload: { msg: error.response.data },
+          payload: { msg: translateText(error.response.data, language) },
         });
       }
     }
@@ -180,7 +180,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: 'LOGOUT_USER' });
   };
 
-  const createJob = async () => {
+  const createJob = async (language) => {
     dispatch({ type: 'CREATE_JOB_BEGIN' });
     try {
       const { position, company, jobLocation, jobType, status } = state;
@@ -194,13 +194,14 @@ const AppProvider = ({ children }) => {
       });
       dispatch({
         type: 'CREATE_JOB_SUCCESS',
+        payload: { language }
       });
       clearValues();
     } catch (error) {
       if (error.response.status === 401) return;
       dispatch({
         type: 'CREATE_JOB_ERROR',
-        payload: { msg: error.response.data },
+        payload: { msg: translateText(error.response.data, language) },
       });
     }
     clearAlert();
@@ -210,7 +211,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: 'EDIT_JOB_SET_ID', payload: { id } });
   };
 
-  const editJob = async () => {
+  const editJob = async (language) => {
     dispatch({ type: 'EDIT_JOB_BEGIN' });
     try {
       const { editJobId, position, company, jobLocation, jobType, status } =
@@ -225,13 +226,14 @@ const AppProvider = ({ children }) => {
       });
       dispatch({
         type: 'EDIT_JOB_SUCCESS',
+        payload: { language }
       });
       clearValues();
     } catch (error) {
       if (error.response.status === 401) return;
       dispatch({
         type: 'EDIT_JOB_ERROR',
-        payload: { msg: error.response.data },
+        payload: { msg: translateText(error.response.data, language) },
       });
     }
     clearAlert();
@@ -282,10 +284,10 @@ const AppProvider = ({ children }) => {
       const { data } = await authFetch('/jobs/stats');
       const monthlyApplications = data.monthlyApplications.map((e) => {
         const reformedDate = DateTime.fromISO(e.date)
-        .setLocale(translateText('el', language))
-        .toFormat('LLL dd');
+          .setLocale(translateText('el', language))
+          .toFormat('LLL dd');
         reformDate(e, 'date', reformedDate);
-        const countNumber = e.count
+        const countNumber = e.count;
         delete e.count;
         reformDate(e, translateText('Αιτήσεις', language), countNumber);
         return e;
@@ -328,7 +330,7 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     getCurrentUser();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <AppContext.Provider

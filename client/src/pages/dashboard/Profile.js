@@ -16,10 +16,10 @@ const Profile = () => {
     e.preventDefault();
     // Remove while testing
     if (!name || !email || !lastName || !location) {
-      displayAlert();
+      displayAlert(language);
       return;
     }
-    updateUser({ name, email, lastName, location });
+    updateUser({ name, email, lastName, location }, language);
   };
   return (
     <Wrapper>

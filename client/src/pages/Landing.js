@@ -74,7 +74,7 @@ const Landing = () => {
                     loginUser({
                       email: 'test@test.gr',
                       password: 'secret',
-                    });
+                    }, language);
                   }}
                 >
                   {isLoading ? translateText('Φόρτωση...', language) : translateText('Επίδειξη Εφαρμογής', language)}

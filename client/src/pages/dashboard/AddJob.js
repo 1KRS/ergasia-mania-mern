@@ -27,14 +27,14 @@ const AddJob = () => {
     e.preventDefault();
 
     if (!position || !company || !jobLocation) {
-      displayAlert();
+      displayAlert(language);
       return;
     }
     if (isEditing) {
-      editJob();
+      editJob(language);
       return;
     }
-    createJob();
+    createJob(language);
   };
 
   const handleJobInput = (e) => {

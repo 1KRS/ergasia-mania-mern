@@ -81,16 +81,16 @@ const getAllJobs = async (req, res) => {
   let result = Job.find(queryObject);
 
   // chain sort conditions
-  if (sort === 'Νεότερες' || sort === 'Latest') {
+  if (sort === 'Νεότερες') {
     result = result.sort('-createdAt');
   }
-  if (sort === 'Παλαιότερες' || sort === 'Oldest') {
+  if (sort === 'Παλαιότερες') {
     result = result.sort('createdAt');
   }
-  if (sort === 'Α -> Ω' || sort === 'A -> Z') {
+  if (sort === 'Α -> Ω') {
     result = result.sort('position');
   }
-  if (sort === 'Ω -> Α' || sort === 'Z -> A') {
+  if (sort === 'Ω -> Α') {
     result = result.sort('-position');
   }
 
