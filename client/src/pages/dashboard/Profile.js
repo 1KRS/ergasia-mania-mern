@@ -32,28 +32,42 @@ const Profile = () => {
             labelText={translateText('Όνομα', language)}
             type="text"
             name="name"
-            value={name}
+            value={
+              name === 'Χρήστης' ? translateText('Χρήστης', language) : name
+            }
             handleChange={(e) => setName(e.target.value)}
           />
           <FormRow
             labelText={translateText('Επώνυμο', language)}
             type="text"
             name="lastName"
-            value={lastName}
+            value={
+              lastName === 'Δοκιμής'
+                ? translateText('Δοκιμής', language)
+                : lastName
+            }
             handleChange={(e) => setLastName(e.target.value)}
           />
           <FormRow
             labelText={translateText('ηΤαχυδρομείο', language)}
             type="email"
             name="email"
-            value={email}
+            value={
+              email === 'παράδειγμα@ταχυδρομείο.gr'
+                ? translateText('παράδειγμα@ταχυδρομείο.gr', language)
+                : email
+            }
             handleChange={(e) => setEmail(e.target.value)}
           />
           <FormRow
             labelText={translateText('Τοποθεσία', language)}
             type="text"
             name="location"
-            value={location}
+            value={
+              location === 'Η πόλη μου'
+                ? translateText('Η πόλη μου', language)
+                : location
+            }
             handleChange={(e) => setLocation(e.target.value)}
           />
           <button className="btn btn-block" type="submit" disabled={isLoading}>

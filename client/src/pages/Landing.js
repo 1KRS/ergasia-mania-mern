@@ -72,7 +72,7 @@ const Landing = () => {
                   disabled={isLoading}
                   onClick={() => {
                     loginUser({
-                      email: 'test@test.gr',
+                      email: 'παράδειγμα@ταχυδρομείο.gr',
                       password: 'secret',
                     }, language);
                   }}
