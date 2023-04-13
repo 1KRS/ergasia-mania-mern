@@ -4,7 +4,7 @@ function StatItem({ count, title, icon, color, bgc }) {
   return (
     <Wrapper color={color} bgc={bgc}>
       <header>
-        <span className='count'>{count}</span>
+        <div className='count'>{count}</div>
         <div className='icon'>{icon}</div>
       </header>
       <h5 className='title'>{title}</h5>
@@ -13,7 +13,7 @@ function StatItem({ count, title, icon, color, bgc }) {
 }
 
 const Wrapper = styled.article`
-  padding: 2rem;
+  padding: 1rem 2rem 2rem;
   background: var(--white);
   border-radius: var(--borderRadius);
   border-bottom: 5px solid ${(props) => props.color};
@@ -42,7 +42,7 @@ const Wrapper = styled.article`
     border-radius: var(--borderRadius);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: right;
     svg {
       font-size: 2rem;
       color: ${(props) => props.color};
