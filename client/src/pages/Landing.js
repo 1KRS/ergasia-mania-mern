@@ -118,6 +118,7 @@ const Wrapper = styled.main`
     font-weight: 700;
     font-size: 2.6rem;
     text-align: center;
+    margin: 0 0 0.5rem;
     span {
       color: var(--primary-500);
     }
@@ -129,6 +130,7 @@ const Wrapper = styled.main`
   .main-text-container .main-text {
     color: var(--grey-600);
     text-align: center;
+    margin: 0 0 0.5rem;
   }
 
   footer {
@@ -141,11 +143,14 @@ const Wrapper = styled.main`
     justify-content: center;
     align-items: center;
   }
-  .btn-hero {
-    margin: 0.5rem 0 0;
-    cursor: pointer;
+  .btn {
+    display: flex;
+    height: 2.3rem;
+    align-items: center;
   }
-  .btn-hipster {
+  .btn-hero, .btn-hipster {
+    
+    justify-content: center;
     font-size: 1.25rem;
     margin: 0.5rem 0 0;
     cursor: pointer;
