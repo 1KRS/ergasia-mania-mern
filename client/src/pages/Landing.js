@@ -132,7 +132,6 @@ const Wrapper = styled.main`
     text-align: center;
     margin: 0 0 0.5rem;
   }
-
   footer {
     border-radius: var(--borderRadius);
     display: grid;
@@ -148,8 +147,8 @@ const Wrapper = styled.main`
     height: 2.3rem;
     align-items: center;
   }
-  .btn-hero, .btn-hipster {
-    
+  .btn-hero,
+  .btn-hipster {
     justify-content: center;
     font-size: 1.25rem;
     margin: 0.5rem 0 0;
@@ -186,7 +185,22 @@ const Wrapper = styled.main`
       'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     letter-spacing: 0.03rem;
   }
-
+  @media (min-width: 540px) {
+    .actions {
+      display: flex;
+    }
+    .btn-hero,
+    .btn-hipster {
+      font-size: 1.15rem;
+    }
+    .btn-hero {
+      margin-right: 0.5rem;
+    }
+    .btn-hipster {
+      margin-left: 0.5rem;
+      padding: 0.5rem 1.25rem;
+    }
+  }
   @media (min-width: 992px) {
     .logo {
       max-height: 15rem;
@@ -206,21 +220,16 @@ const Wrapper = styled.main`
         color: var(--primary-500);
       }
     }
-    .actions {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .btn-hero {
-      font-size: 0.95rem;
-      margin: 0 0.5rem 0 0;
-      cursor: pointer;
-    }
+    .btn-hero,
     .btn-hipster {
       font-size: 0.95rem;
+    }
+    .btn-hero {
+      margin: 0 0.5rem 0 0;
+    }
+    .btn-hipster {
       margin: 0 0 0 0.5rem;
       padding: 0.5rem 1.25rem;
-      cursor: pointer;
     }
   }
   @media (min-width: 1194px) {
