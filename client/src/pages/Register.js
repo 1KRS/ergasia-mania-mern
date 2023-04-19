@@ -104,10 +104,13 @@ const Register = () => {
           className="btn btn-block btn-hipster"
           disabled={isLoading}
           onClick={() => {
-            loginUser({
-              email: 'παράδειγμα@ταχυδρομείο.gr',
-              password: 'secret',
-            }, language);
+            loginUser(
+              {
+                email: 'παράδειγμα@ταχυδρομείο.gr',
+                password: 'secret',
+              },
+              language
+            );
           }}
         >
           {isLoading

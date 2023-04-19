@@ -8,8 +8,7 @@ import { translateText } from '../utils/translateText';
 import { LanguagesContainer } from '../components';
 
 const Landing = () => {
-  const { language, user, isLoading, loginUser } =
-    useAppContext();
+  const { language, user, isLoading, loginUser } = useAppContext();
   return (
     <React.Fragment>
       {user && <Navigate to="/" />}
@@ -35,29 +34,30 @@ const Landing = () => {
                 Σημείο <span>Ιχνηλάτησης</span> Εργασίας
               </h1>
             )}
-            {language === 'english' ? (
-              <p>
-                Welcome to our job tracker app, where you can have a fast
-                overview of all your work applications at a glance, important
-                information for each individual application of yours as well as
-                the monthly statistics of the last six months.
-              </p>
-            ) : language === 'svenska' ? (
-              <p>
-                Välkommen till vår jobbspårningsapp, där du kan få en snabb
-                överblick över alla dina arbetsansökningar, viktig information
-                för varje enskild ansökan samt månadsstatistiken för de senaste
-                sex månaderna.
-              </p>
-            ) : (
-              <p>
-                Καλώς ήλθατε στο σημείο ιχνηλάτησης της εργασίας σας, όπου
-                μπορείτε με μια ματιά να έχετε την εποπτεία όλων αιτημάτων σας
-                για εργασία, σημαντικές πληροφορίες για κάθε ξεχωριστό αίτημά
-                σας καθώς και μηνιαία στατιστικά του τελευταίου εξαμήνου.
-              </p>
-            )}
-
+            <div className="main-text-container">
+              {language === 'english' ? (
+                <p className="main-text main-text-en">
+                  Welcome to our job tracker app, where you can have a fast
+                  overview of all your work applications at a glance, important
+                  information for each individual application of yours as well
+                  as the monthly statistics of the last six months.
+                </p>
+              ) : language === 'svenska' ? (
+                <p className="main-text main-text-se">
+                  Välkommen till vår jobbspårningsapp, där du kan få en snabb
+                  överblick över alla dina arbetsansökningar, viktig information
+                  för varje enskild ansökan samt månadsstatistiken för de
+                  senaste sex månaderna.
+                </p>
+              ) : (
+                <p className="main-text main-text-el">
+                  Καλώς ήλθατε στο σημείο ιχνηλάτησης της εργασίας σας, όπου
+                  μπορείτε με μια ματιά να έχετε την εποπτεία όλων αιτημάτων σας
+                  για εργασία, σημαντικές πληροφορίες για κάθε ξεχωριστό αίτημά
+                  σας καθώς και μηνιαία στατιστικά του τελευταίου εξαμήνου.
+                </p>
+              )}
+            </div>
             <footer>
               <div className="actions">
                 <Link to="/register" className="btn btn-hero">
@@ -71,13 +71,18 @@ const Landing = () => {
                   className="btn btn-hipster"
                   disabled={isLoading}
                   onClick={() => {
-                    loginUser({
-                      email: 'παράδειγμα@ταχυδρομείο.gr',
-                      password: 'secret',
-                    }, language);
+                    loginUser(
+                      {
+                        email: 'παράδειγμα@ταχυδρομείο.gr',
+                        password: 'secret',
+                      },
+                      language
+                    );
                   }}
                 >
-                  {isLoading ? translateText('Φόρτωση...', language) : translateText('Επίδειξη Εφαρμογής', language)}
+                  {isLoading
+                    ? translateText('Φόρτωση...', language)
+                    : translateText('Επίδειξη Εφαρμογής', language)}
                 </button>
               </div>
               <LanguagesContainer />
@@ -101,7 +106,7 @@ const Wrapper = styled.main`
     justify-content: center;
   }
   .logo {
-    max-height: 15rem;
+    max-height: 7.5rem;
   }
   .page {
     min-height: calc(100vh - var(--nav-height));
@@ -112,25 +117,37 @@ const Wrapper = styled.main`
   h1 {
     font-weight: 700;
     font-size: 2.6rem;
+    text-align: center;
     span {
       color: var(--primary-500);
     }
   }
-  p {
-    color: var(--grey-600);
+  .main-text-container {
+    display: flex;
+    justify-content: center;
   }
+  .main-text-container .main-text {
+    color: var(--grey-600);
+    text-align: center;
+  }
+
   footer {
     border-radius: var(--borderRadius);
     display: grid;
     grid-template-rows: 1fr auto;
   }
+  .actions {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
   .btn-hero {
-    margin: 0 0.5rem 0 0;
+    margin: 0.5rem 0 0;
+    cursor: pointer;
   }
   .btn-hipster {
     font-size: 1.25rem;
-    margin: 0 0 0 0.5rem;
-    padding: 0.5rem 1.25rem;
+    margin: 0.5rem 0 0;
     cursor: pointer;
   }
   .main-img {
@@ -146,7 +163,6 @@ const Wrapper = styled.main`
     height: 50px;
     border: none;
     background-color: transparent;
-
     transition: var(--transition);
   }
   .flag {
@@ -159,8 +175,17 @@ const Wrapper = styled.main`
     border-radius: 50%;
     box-shadow: var(--shadow-5);
   }
+  .main-text-en,
+  .main-text-se {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+      'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    letter-spacing: 0.03rem;
+  }
 
   @media (min-width: 992px) {
+    .logo {
+      max-height: 15rem;
+    }
     .page {
       grid-template-columns: 1fr 1fr;
       column-gap: 3rem;
@@ -168,7 +193,37 @@ const Wrapper = styled.main`
     .main-img {
       display: block;
     }
+    h1 {
+      font-weight: 700;
+      font-size: 2rem;
+      text-align: center;
+      span {
+        color: var(--primary-500);
+      }
+    }
+    .actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .btn-hero {
+      font-size: 0.95rem;
+      margin: 0 0.5rem 0 0;
+      cursor: pointer;
+    }
+    .btn-hipster {
+      font-size: 0.95rem;
+      margin: 0 0 0 0.5rem;
+      padding: 0.5rem 1.25rem;
+      cursor: pointer;
+    }
   }
-`
+  @media (min-width: 1194px) {
+    .btn-hero,
+    .btn-hipster {
+      font-size: 1.25rem;
+    }
+  }
+`;
 
 export default Landing;
