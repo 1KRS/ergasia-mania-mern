@@ -17,7 +17,7 @@ const LanguagesContainer = () => {
             changeLanguage('ελληνικά');
           }}
         >
-          <CircleFlag countryCode="gr" className="flag" />
+          <CircleFlag countryCode="gr" className="flag" alt="Ελληνικά"/>
         </button>
         <button
           type="button"
@@ -27,7 +27,7 @@ const LanguagesContainer = () => {
             changeLanguage('english');
           }}
         >
-          <CircleFlag countryCode="uk" className="flag" />
+          <CircleFlag countryCode="uk" className="flag" alt="English"/>
         </button>
         <button
           type="button"
@@ -37,7 +37,7 @@ const LanguagesContainer = () => {
             changeLanguage('svenska');
           }}
         >
-          <CircleFlag countryCode="se" className="flag" />
+          <CircleFlag countryCode="se" className="flag" alt="Svenska"/>
         </button>
       </div>
     </Wrapper>
