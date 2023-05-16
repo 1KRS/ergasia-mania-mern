@@ -24,20 +24,20 @@ const LanguagesContainer = () => {
           className="flag-btn"
           disabled={isLoading}
           onClick={() => {
-            changeLanguage('english');
+            changeLanguage('svenska');
           }}
         >
-          <CircleFlag countryCode="uk" className="flag" alt="English"/>
+          <CircleFlag countryCode="se" className="flag" alt="Svenska"/>
         </button>
         <button
           type="button"
           className="flag-btn"
           disabled={isLoading}
           onClick={() => {
-            changeLanguage('svenska');
+            changeLanguage('english');
           }}
         >
-          <CircleFlag countryCode="se" className="flag" alt="Svenska"/>
+          <CircleFlag countryCode="uk" className="flag" alt="English"/>
         </button>
       </div>
     </Wrapper>
