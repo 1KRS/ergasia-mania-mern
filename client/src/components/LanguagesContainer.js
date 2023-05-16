@@ -14,20 +14,20 @@ const LanguagesContainer = () => {
           className="flag-btn"
           disabled={isLoading}
           onClick={() => {
-            changeLanguage('english');
+            changeLanguage('ελληνικά');
           }}
         >
-          <CircleFlag countryCode="uk" className="flag" alt="English"/>
+          <CircleFlag countryCode="gr" className="flag" alt="Ελληνικά"/>
         </button>
         <button
           type="button"
           className="flag-btn"
           disabled={isLoading}
           onClick={() => {
-            changeLanguage('ελληνικά');
+            changeLanguage('english');
           }}
         >
-          <CircleFlag countryCode="gr" className="flag" alt="Ελληνικά"/>
+          <CircleFlag countryCode="uk" className="flag" alt="English"/>
         </button>
         <button
           type="button"
