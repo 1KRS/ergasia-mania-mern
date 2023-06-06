@@ -285,7 +285,7 @@ const AppProvider = ({ children }) => {
       const monthlyApplications = data.monthlyApplications.map((e) => {
         const reformedDate = DateTime.fromISO(e.date)
           .setLocale(translateText('el', language))
-          .toFormat('LLL dd');
+          .toFormat('LLL yy');
         reformDate(e, 'date', reformedDate);
         const countNumber = e.count;
         delete e.count;
